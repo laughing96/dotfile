@@ -1,0 +1,24 @@
+[[plugin.deps]]
+use = "yazi-rs/plugins:mime-ext"
+rev = "68f7d48"
+hash = "363bd15c7e32f36a814f13e22daaf5a"
+
+[[plugin.deps]]
+use = "dedukun/bookmarks"
+rev = "9ef1254"
+hash = "92fbb5483657fa7976cdf4e0104e18e0"
+
+[[plugin.deps]]
+use = "yazi-rs/plugins:chmod"
+rev = "68f7d48"
+hash = "8da0b15a97b5dfd13941d1ecc617ac7c"
+
+[[plugin.deps]]
+use = "yazi-rs/plugins:diff"
+rev = "68f7d48"
+hash = "492e4757f332e29f982556bf507e043c"
+
+[[flavor.deps]]
+use = "yazi-rs/flavors:catppuccin-macchiato"
+rev = "4296a38"
+hash = "1e2cc3f0f96197f3dac9591be50bb2af"
