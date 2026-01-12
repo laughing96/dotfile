@@ -18,6 +18,8 @@ return {
    default_cursor_style = 'BlinkingBlock',
    cursor_blink_rate = 650,
 
+    window_background_opacity = 1.0,
+
    -- color scheme
    colors = colors,
 
@@ -48,7 +50,7 @@ return {
       top = 10,
       bottom = 7.5,
    },
-   adjust_window_size_when_changing_font_size = false,
+   adjust_window_size_when_changing_font_size = true,
    window_close_confirmation = 'NeverPrompt',
    window_frame = {
       active_titlebar_bg = '#090909',

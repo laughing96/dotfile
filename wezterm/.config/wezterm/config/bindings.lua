@@ -249,7 +249,7 @@ local mouse_bindings = {
 
 return {
    disable_default_key_bindings = true,
-    -- debug_key_events = true,
+    debug_key_events = true,
    -- disable_default_mouse_bindings = true,
    leader = { key = 'z', mods = 'CTRL', timeout_milliseconds = 2000 },
    keys = keys,

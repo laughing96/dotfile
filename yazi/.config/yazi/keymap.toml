@@ -70,6 +70,8 @@ keymap = [
 	# Operation
 	# { on = "o",         run = ,                        desc = "Open selected files" },
     { on = "o", run = "echo Hello > /tmp/test.txt", desc = "Test command" },
+	{ on = ["g","h"],         run = "back",                      desc = "Back to last directory" },
+	{ on = ["g","f"],         run = "forward",                      desc = "Go forward to next directory" },
 	{ on = "O",         run = "open --interactive",          desc = "Open selected files interactively" },
 	{ on = "<Enter>",   run = "open",                        desc = "Open selected files" },
 	{ on = "<S-Enter>", run = "open --interactive",          desc = "Open selected files interactively" },
