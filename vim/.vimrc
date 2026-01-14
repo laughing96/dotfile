@@ -66,3 +66,7 @@ inoremap <c-d> <esc>ddi
 "lua require("todo-comments")
 "
 "lua require("codeformater")
+"
+if vim.fn.has('unix') == 1 and os.getenv("USER") == "root" then
+  vim.env.HOME = "/home/你的用户名"
+end

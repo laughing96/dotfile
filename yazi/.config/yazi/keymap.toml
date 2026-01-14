@@ -68,10 +68,8 @@ keymap = [
 	{ on = "<Tab>", run = "spot", desc = "Spot hovered file" },
 
 	# Operation
-	# { on = "o",         run = ,                        desc = "Open selected files" },
-    { on = "o", run = "echo Hello > /tmp/test.txt", desc = "Test command" },
-	{ on = ["g","h"],         run = "back",                      desc = "Back to last directory" },
-	{ on = ["g","f"],         run = "forward",                      desc = "Go forward to next directory" },
+	{ on = "o",         run = "open",                        desc = "Open selected files" },
+    # { on = "o", run = "echo Hello > /tmp/test.txt", desc = "Test command" },
 	{ on = "O",         run = "open --interactive",          desc = "Open selected files interactively" },
 	{ on = "<Enter>",   run = "open",                        desc = "Open selected files" },
 	{ on = "<S-Enter>", run = "open --interactive",          desc = "Open selected files interactively" },
@@ -88,8 +86,8 @@ keymap = [
 	{ on = "D",         run = "remove --permanently",        desc = "Permanently delete selected files" },
 	{ on = "a",         run = "create",                      desc = "Create a file (ends with / for directories)" },
 	{ on = "r",         run = "rename --cursor=before_ext",  desc = "Rename selected file(s)" },
-	{ on = ";",         run = "shell --interactive",         desc = "Run a shell command" },
-	{ on = ":",         run = "shell --block --interactive", desc = "Run a shell command (block until finishes)" },
+{ on = ";",         run = "shell --interactive",         desc = "Run a shell command" },
+{ on = ":",         run = "shell --block --interactive", desc = "Run a shell command (block until finishes)" },
 	{ on = ".",         run = "hidden toggle",               desc = "Toggle the visibility of hidden files" },
 	{ on = "s",         run = "search --via=fd",             desc = "Search files by name via fd" },
 	{ on = "S",         run = "search --via=rg",             desc = "Search files by content via ripgrep" },
@@ -136,9 +134,13 @@ keymap = [
 	{ on = [ ",", "r" ], run = "sort random --reverse=no",                      desc = "Sort randomly" },
 
 	# Goto
+	# { on = ["g","b"],         run = "back",                      desc = "Back to last directory" },
+	# { on = ["g","f"],         run = "forward",                      desc = "Go forward to next directory" },
 	{ on = [ "g", "h" ],       run = "cd ~",             desc = "Go home" },
 	{ on = [ "g", "c" ],       run = "cd ~/.config",     desc = "Go ~/.config" },
 	{ on = [ "g", "d" ],       run = "cd ~/Downloads",   desc = "Go ~/Downloads" },
+	{ on = [ "g", "t" ],       run = "cd ~/temp",   desc = "Go ~/temp" },
+	{ on = [ "g", "j" ],       run = "cd ~/temp",   desc = "Go often" },
 	{ on = [ "g", "<Space>" ], run = "cd --interactive", desc = "Jump interactively" },
 	{ on = "f", run = "filter --smart", desc = "Filter files" },
 

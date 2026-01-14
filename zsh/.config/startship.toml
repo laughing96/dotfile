@@ -1,0 +1,41 @@
+add_newline = true
+
+[character]
+success_symbol = "➜ "
+style = "blue"
+error_symbol = "➜ "
+
+[git_branch]
+symbol = " "
+style = "magenta"
+
+[git_status]
+style = "yellow"
+
+[cmd_duration]
+min_timewhile = 500
+format = "⏱ [$duration]($style) "
+
+# --------------------
+# Python
+# --------------------
+[python]
+symbol = "🐍 "
+format = "py [$symbol$version $virtualenv]($style) "
+style = "yellow"
+python_binary = ["python3", "python"]
+detect_extensions = ["py"]
+detect_files = ["pyproject.toml", "requirements.txt", "Pipfile"]
+detect_folders = [".venv", "venv"]
+
+# --------------------
+# Node (nvm)
+# --------------------
+[nodejs]
+symbol = "⬢ "
+format = "node [$symbol$version]($style) "
+style = "green"
+detect_extensions = ["js", "ts", "jsx", "tsx"]
+detect_files = ["package.json", ".nvmrc"]
+detect_folders = ["node_modules"]
+

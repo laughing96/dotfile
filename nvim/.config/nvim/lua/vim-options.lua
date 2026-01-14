@@ -56,3 +56,7 @@ vim.diagnostic.config({
   severity_sort = true,
 })
 
+
+if vim.fn.has('unix') == 1 and os.getenv("USER") == "root" then
+  vim.env.HOME = "/home/你的用户名"
+end
