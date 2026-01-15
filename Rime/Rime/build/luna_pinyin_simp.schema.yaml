@@ -7,7 +7,7 @@ __build_info:
     key_bindings.custom: 0
     luna_pinyin.custom: 1768404257
     luna_pinyin.schema: 1768401969
-    luna_pinyin_simp.custom: 1768489339
+    luna_pinyin_simp.custom: 1768491472
     luna_pinyin_simp.schema: 1768354364
     punctuation: 1768354364
     punctuation.custom: 0
@@ -48,8 +48,10 @@ engine:
 key_binder:
   bindings:
     - {accept: "Control+period", toggle: ascii_punct, when: always}
+    - {accept: comma, send: Page_Up, when: has_menu}
+    - {accept: period, send: Page_Down, when: has_menu}
 menu:
-  page_size: 6
+  page_size: 8
 punctuator:
   full_shape:
     " ": {commit: "　"}

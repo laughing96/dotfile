@@ -1,7 +1,7 @@
 # luna_pinyin.custom.yaml
 #
 # 補靪功能：將朙月拼音的詞庫修改爲朙月拼音擴充詞庫
-#
+# 
 # 作者：瑾昀 <cokunhui@gmail.com>
 #
 # 部署位置：
@@ -23,7 +23,7 @@
 # 朙月拼音·简化字	luna_pinyin_simp
 # 朙月拼音·臺灣正體	luna_pinyin_tw
 # 朙月拼音·語句流	luna_pinyin_fluency
-#
+# 
 
 patch:
   # 載入朙月拼音擴充詞庫
@@ -33,7 +33,7 @@ patch:
   "speller/algebra/@before 0": xform/^([b-df-hj-np-tv-z])$/$1_/
 
   menu:
-    page_size: 6
+    page_size: 8
 
   #  符号快速上屏
   
@@ -93,6 +93,10 @@ patch:
   key_binder:
    bindings: 
     - {accept: "Control+period", toggle: ascii_punct, when: always}
+    # 逗号：上一页
+    - { when: has_menu, accept: comma, send: Page_Up }
+    # 句号：下一页
+    - { when: has_menu, accept: period, send: Page_Down }
 
   engine:
     processors:

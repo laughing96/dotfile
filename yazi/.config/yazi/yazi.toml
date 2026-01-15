@@ -36,7 +36,7 @@ edit = [
 ]
 open = [
 	{ run = 'xdg-open "$1"',                desc = "Open", for = "linux" },
-	{ run = 'open "$@"',                    desc = "Open", for = "macos" },
+	{ run = 'open "$1"',                    desc = "Open", for = "macos" },
 	{ run = 'start "" "%1"', orphan = true, desc = "Open", for = "windows" },
 	{ run = 'termux-open "$1"',             desc = "Open", for = "android" },
 ]
@@ -147,6 +147,12 @@ append_previewers = [
 	# Fallback
 	{ name = "*", run = "file" },
 ]
+
+# Open directory in system file manager (override O only for directories)
+[[manager.prepend_keymap]]
+on   = "O"
+run  = "shell --confirm 'test -d \"$@\" && (xdg-open \"$@\" || open \"$@\" || explorer \"$@\") || exit 1'"
+desc = "Open directory in system file manager"
 #
 # [input]
 # cursor_blink = false

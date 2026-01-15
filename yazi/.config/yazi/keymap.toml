@@ -69,7 +69,6 @@ keymap = [
 
 	# Operation
 	{ on = "o",         run = "open",                        desc = "Open selected files" },
-    # { on = "o", run = "echo Hello > /tmp/test.txt", desc = "Test command" },
 	{ on = "O",         run = "open --interactive",          desc = "Open selected files interactively" },
 	{ on = "<Enter>",   run = "open",                        desc = "Open selected files" },
 	{ on = "<S-Enter>", run = "open --interactive",          desc = "Open selected files interactively" },
@@ -135,12 +134,11 @@ keymap = [
 
 	# Goto
 	# { on = ["g","b"],         run = "back",                      desc = "Back to last directory" },
-	# { on = ["g","f"],         run = "forward",                      desc = "Go forward to next directory" },
 	{ on = [ "g", "h" ],       run = "cd ~",             desc = "Go home" },
 	{ on = [ "g", "c" ],       run = "cd ~/.config",     desc = "Go ~/.config" },
 	{ on = [ "g", "d" ],       run = "cd ~/Downloads",   desc = "Go ~/Downloads" },
 	{ on = [ "g", "t" ],       run = "cd ~/temp",   desc = "Go ~/temp" },
-	{ on = [ "g", "j" ],       run = "cd ~/temp",   desc = "Go often" },
+	{ on = [ "g", "o" ],       run = "cd ~/Code",   desc = "Go often" },
 	{ on = [ "g", "<Space>" ], run = "cd --interactive", desc = "Jump interactively" },
 	{ on = "f", run = "filter --smart", desc = "Filter files" },
 
