@@ -13,7 +13,7 @@ EVENT_OPTS.schema = {
    {
       name = 'date_format',
       type = 'string',
-      default = '%a %H:%M:%S',
+      default = '%a %D %H:%M:%S',
    },
 }
 EVENT_OPTS.validator = OptsValidator:new(EVENT_OPTS.schema)
