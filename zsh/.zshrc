@@ -1,8 +1,8 @@
 # PATH env
-export PATH="$HOME/.tmuxifier/bin:$PATH"
-export PATH="$HOME/.local/bin:$PATH"
 export PATH="/opt/homebrew/bin:$PATH"
 export PATH="/usr/local/opt/postgresql/bin:$PATH"
+export PATH="$HOME/.tmuxifier/bin:$PATH"
+export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
 
 #In short, Tmuxifier allows you to easily create, edit, and load "layout" files, which are simple shell scripts where you use the tmux command and helper commands provided by tmuxifier to manage Tmux sessions and windows
@@ -185,35 +185,35 @@ cdp() {
     fi
 }
 
-# fzf 文件查找器，带 bat 预览，支持 -rec N
+# fzf 文件查找器（fd + bat 预览）
+# 额外支持：-rec N  （N 天内修改的文件）
 f() {
     local days=""
-    local args=("$@")   # 保存所有参数
+    local args=("$@")
     local file
     local cmd
 
     # 解析 -rec N
-    if [[ ${#args[@]} -ge 2 ]] && [[ ${args[0]} == "-rec" ]]; then
-        days=${args[1]}
-        # 移除已解析参数
+    if [ "${#args[@]}" -ge 2 ] && [ "${args[0]}" = "-rec" ]; then
+        days="${args[1]}"
         args=("${args[@]:2}")
     fi
 
-    # 构造 fd 命令
-    if [[ -n "$days" ]]; then
+    # 构造 fd 命令（完全保留 fd 原有参数能力）
+    if [ -n "$days" ]; then
         cmd=(fd --type f --hidden --exclude .git --changed-within "${days}d" "${args[@]}")
     else
         cmd=(fd --type f --hidden --exclude .git "${args[@]}")
     fi
 
-    # 运行 fzf
-    file=$("${cmd[@]}" | fzf --preview='bat --style=numbers --color=always --line-range :300 {}')
+    # fzf 选择
+    file="$("${cmd[@]}" | fzf \
+        --preview='bat --style=numbers --color=always --line-range :300 {}')"
 
-    # 如果有选择文件，打开 nvim
-    if [[ -n "$file" ]]; then
-        nvim "$file"
-    fi
+    # 打开文件
+    [ -n "$file" ] && nvim "$file"
 }
+
 
 # ripgrep search with fzf preview and nvim jump
 r() {
@@ -237,17 +237,6 @@ r() {
     nvim +"$line" "$file"
 }
 
-# recent files with fzf + bat preview
-recent() {
-    local days=2
-
-    # 如果传了参数，使用第一个参数覆盖 days
-    [[ -n "$1" ]] && days="$1"
-
-    # 查找最近修改的文件
-    fd . --type f --changed-within "${days}d" \
-        | fzf --preview='bat --style=numbers --color=always {}'
-}
 
 lf() {
   local file="${1:?usage: ltf <logfile>}"
