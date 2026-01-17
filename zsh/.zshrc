@@ -79,6 +79,9 @@ export PKG_CONFIG_PATH="/opt/homebrew/opt/readline/lib/pkgconfig:/opt/homebrew/o
 # export PATH="/opt/homebrew/opt/tcl-tk@8/bin:$PATH"
 
 # alias 
+# tmux
+alias ta='tmux new-session -A -s main'
+alias tm='tmux'
 # ls 系列（现代化）
 alias ls='eza --icons --group-directories-first'
 alias ll='eza -lh --icons --group-directories-first'
