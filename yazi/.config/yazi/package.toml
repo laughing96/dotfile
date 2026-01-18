@@ -18,6 +18,11 @@ use = "yazi-rs/plugins:diff"
 rev = "68f7d48"
 hash = "492e4757f332e29f982556bf507e043c"
 
+[[plugin.deps]]
+use = "yazi-rs/plugins:mactag"
+rev = "56971d0"
+hash = "1f75c3efbba45c1289f06676145c0d98"
+
 [[flavor.deps]]
 use = "yazi-rs/flavors:catppuccin-macchiato"
 rev = "4296a38"

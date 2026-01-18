@@ -153,6 +153,16 @@ append_previewers = [
 on   = "O"
 run  = "shell --confirm 'test -d \"$@\" && (xdg-open \"$@\" || open \"$@\" || explorer \"$@\") || exit 1'"
 desc = "Open directory in system file manager"
+
+[[plugin.prepend_fetchers]]
+id  = "mactag"
+url = "*"
+run = "mactag"
+
+[[plugin.prepend_fetchers]]
+id  = "mactag"
+url = "*/"
+run = "mactag"
 #
 # [input]
 # cursor_blink = false

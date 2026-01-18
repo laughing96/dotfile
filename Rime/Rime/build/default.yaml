@@ -2,7 +2,7 @@ __build_info:
   rime_version: 1.16.0
   timestamps:
     default: 1768354364
-    default.custom: 1768487004
+    default.custom: 1768621312
     key_bindings: 1768354364
     key_bindings.custom: 0
     punctuation: 1768354364
@@ -15,7 +15,7 @@ app_options:
   com.googlecode.iterm2:
     ascii_mode: true
 ascii_composer:
-  inline_ascii: true
+  inline_ascii: false
   switch_key:
     Caps_Lock: commit_code
     Control_L: noop
@@ -154,4 +154,4 @@ switcher:
     - zh_hant_tw
 switches:
   - name: ascii_mode
-    reset: 1
+    reset: 0

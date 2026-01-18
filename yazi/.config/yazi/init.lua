@@ -42,3 +42,26 @@ require("bookmarks"):setup({
 })
 
 
+require("mactag"):setup {
+	-- Keys used to add or remove tags
+	keys = {
+		o = "todo",
+		i = "doing",
+		b = "blocked",
+		r = "review",
+		d = "done",
+		a = "archive",
+        t = "temp"
+
+	},
+	-- Colors used to display tags
+	colors = {
+		todo = "#ee7b70", --red 
+		doing = "#f59e0b", -- orange
+		blocked = "#fbe764", --- yellow
+		review = "#91fc87", -- green 
+		done = "#5fa3f8", -- blue
+		archive = "#cb88f8", -- purple 
+        temp = "#111111",
+	},
+}

@@ -1,0 +1,465 @@
+# Rime dictionary
+# encoding: utf-8
+#
+# https://github.com/TimoLin/text2dict-rime
+#
+---
+name: Timo
+version: "2024.3.8"
+sort: by_weight
+use_preset_vocabulary: true
+...
+人之情多矫	ren zhi qing duo jiao	100
+世之俗多伪	shi zhi su duo wei	100
+岂可信乎	qi ke xin hu	100
+子曰：”巧言	zi yue ：” qiao yan	100
+令色	ling se	100
+足恭	zu gong	100
+左丘明耻之	zuo qiu ming chi zhi	100
+丘亦耻之	qiu yi chi zhi	100
+人者多欲	ren zhe duo yu	100
+其性尚私	qi xing shang si	100
+成事享其功	cheng shi xiang qi gong	100
+败事委其过	bai shi wei qi guo	100
+且圣人不能逾者	qie sheng ren bu neng yu zhe	100
+概人之本然也	gai ren zhi ben ran ye	100
+多欲则贪	duo yu ze tan	100
+尚私则枉	shang si ze wang	100
+其罪遂生	qi zui sui sheng	100
+民之畏惩	min zhi wei cheng	100
+吏之惧祸	li zhi ju huo	100
+或以敛行	huo yi lian xing	100
+但有机变	dan you ji bian	100
+孰难料也	shu nan liao ye	100
+为害常因不察	wei hai chang yin bu cha	100
+致祸归于不忍	zhi huo gui yu bu ren	100
+桓公溺臣身死实哀	huan gong ni chen shen si shi ai	100
+夫差存越	fu cha cun yue	100
+终丧其吴	zhong sang qi wu	100
+亲无过父子	qin wu guo fu zi	100
+然广逆恒有	ran guang ni heng you	100
+恩莫逾君臣	en mo yu jun chen	100
+则莽奸弗绝	ze mang jian fu jue	100
+是以人心多诈	shi yi ren xin duo zha	100
+不可视其表	bu ke shi qi biao	100
+世事寡情	shi shi gua qing	100
+善者终无功	shan zhe zhong wu gong	100
+信人莫若信己	xin ren mo ruo xin ji	100
+防人勿存幸念	fang ren wu cun xing nian	100
+此道不修	ci dao bu xiu	100
+夫庸为智者乎	fu yong wei zhi zhe hu	100
+为上者疑	wei shang zhe yi	100
+为下者惧	wei xia zhe ju	100
+上下背德	shang xia bei de	100
+祸必兴焉	huo bi xing yan	100
+上者骄	shang zhe jiao	100
+安其心以顺	an qi xin yi shun	100
+上者忧	shang zhe you	100
+去其患以忠	qu qi huan yi zhong	100
+顺不避媚	shun bu bi mei	100
+忠不忌曲	zhong bu ji qu	100
+虽为人诟亦不可少为也	sui wei ren gou yi bu ke shao wei ye	100
+上所予	shang suo yu	100
+自可取	zi ke qu	100
+生死于人	sheng si yu ren	100
+安可逆乎	an ke ni hu	100
+是以智者善窥上意	shi yi zhi zhe shan kui shang yi	100
+愚者固执己见	yu zhe gu zhi ji jian	100
+福祸相异	fu huo xiang yi	100
+咸于此耳	xian yu ci er	100
+人主莫喜强臣	ren zhu mo xi qiang chen	100
+臣下戒怀妄念	chen xia jie huai wang nian	100
+臣强则死	chen qiang ze si	100
+念妄则亡	nian wang ze wang	100
+周公尚畏焉	zhou gong shang wei yan	100
+况他人乎	kuang ta ren hu	100
+上无不智	shang wu bu zhi	100
+臣无至贤	chen wu zhi xian	100
+功归上	gong gui shang	100
+罪归己	zui gui ji	100
+戒惕弗弃	jie ti fu qi	100
+智勇弗显	zhi yong fu xian	100
+虽至亲亦忍绝	sui zhi qin yi ren jue	100
+纵为恶亦不让	zong wei e yi bu rang	100
+诚如是也	cheng ru shi ye	100
+非徒上宠	fei tu shang chong	100
+而又宠无衰矣	er you chong wu shuai yi	100
+甘居人下者鲜	gan ju ren xia zhe xian	100
+御之失谋	yu zhi shi mou	100
+非犯	fei fan	100
+则篡耳	ze cuan er	100
+上无威	shang wu wei	100
+下生乱	xia sheng luan	100
+威成于礼	wei cheng yu li	100
+恃以刑	shi yi xing	100
+失之纵	shi zhi zong	100
+私勿与人	si wu yu ren	100
+谋必辟	mou bi pi	100
+幸非一人	xing fei yi ren	100
+专固害	zhuan gu hai	100
+机心信隐	ji xin xin yin	100
+交接靡密	jiao jie mi mi	100
+庶下者知威而畏也	shu xia zhe zhi wei er wei ye	100
+下附上以成志	xia fu shang yi cheng zhi	100
+上恃下以成名	shang shi xia yi cheng ming	100
+下有所求	xia you suo qiu	100
+其心必进	qi xin bi jin	100
+迁之宜缓	qian zhi yi huan	100
+速则满矣	su ze man yi	100
+上有所欲	shang you suo yu	100
+其神若亲	qi shen ruo qin	100
+礼下勿辞	li xia wu ci	100
+拒者无助矣	ju zhe wu zhu yi	100
+人有所好	ren you suo hao	100
+以好诱之无不取	yi hao you zhi wu bu qu	100
+人有所惧	ren you suo ju	100
+以惧迫之无不纳	yi ju po zhi wu bu na	100
+才可用者	cai ke yong zhe	100
+非大害而隐忍	fei da hai er yin ren	100
+其不可制	qi bu ke zhi	100
+果大材而亦诛	guo da cai er yi zhu	100
+赏勿吝	shang wu lin	100
+以坠其志	yi zhui qi zhi	100
+罚适时	fa shi shi	100
+以警其心	yi jing qi xin	100
+恩威同施	en wei tong shi	100
+才德相较	cai de xiang jiao	100
+苟无功	gou wu gong	100
+得无天耶	de wu tian ye	100
+权者	quan zhe	100
+人莫离也	ren mo li ye	100
+取之非易	qu zhi fei yi	100
+守之犹艰	shou zhi you jian	100
+智不足弗得	zhi bu zu fu de	100
+谋有失竟患	mou you shi jing huan	100
+死生事也	si sheng shi ye	100
+假天用事	jia tian yong shi	100
+名之顺也	ming zhi shun ye	100
+自绝于天	zi jue yu tian	100
+敌之罪也	di zhi zui ye	100
+民有其愚	min you qi yu	100
+权有其智	quan you qi zhi	100
+德之不昭	de zhi bu zhao	100
+人所难附焉	ren suo nan fu yan	100
+乱世用能	luan shi yong neng	100
+平则去患	ping ze qu huan	100
+盛世惟忠	sheng shi wei zhong	100
+庸则自从	yong ze zi cong	100
+名可易	ming ke yi	100
+实必争	shi bi zheng	100
+名实悖之	ming shi bei zhi	100
+权之丧矣	quan zhi sang yi	100
+嗜权逾命者	shi quan yu ming zhe	100
+莫敢不为	mo gan bu wei	100
+权之弗让也	quan zhi fu rang ye	100
+其求必极	qi qiu bi ji	100
+机为要	ji wei yao	100
+无机自毁	wu ji zi hui	100
+事可绝	shi ke jue	100
+人伦亦灭	ren lun yi mie	100
+利禄为羁	li lu wei ji	100
+去其实害	qu qi shi hai	100
+赏以虚名	shang yi xu ming	100
+收其本心	shou qi ben xin	100
+若此为之	ruo ci wei zhi	100
+权无不得	quan wu bu de	100
+亦无失也	yi wu shi ye	100
+人皆有敌也	ren jie you di ye	100
+敌者	di zhe	100
+利害相冲	li hai xiang chong	100
+死生弗容	si sheng fu rong	100
+未察之无以辨友	wei cha zhi wu yi bian you	100
+非制之无以成业	fei zhi zhi wu yi cheng ye	100
+此大害也	ci da hai ye	100
+必绝之	bi jue zhi	100
+君子敌小人	jun zi di xiao ren	100
+亦小人也	yi xiao ren ye	100
+小人友君子	xiao ren you jun zi	100
+亦君子也	yi jun zi ye	100
+名为虚	ming wei xu	100
+智者不计毁誉	zhi zhe bu ji hui yu	100
+利为上	li wei shang	100
+愚者惟求良善	yu zhe wei qiu liang shan	100
+众之敌	zhong zhi di	100
+未可谓吾敌	wei ke wei wu di	100
+上之敌	shang zhi di	100
+虽吾友亦敌也	sui wu you yi di ye	100
+亲之故	qin zhi gu	100
+不可道吾亲	bu ke dao wu qin	100
+刑之故	xing zhi gu	100
+向吾亲亦弃也	xiang wu qin yi qi ye	100
+惑敌于不觉	huo di yu bu jue	100
+待时也	dai shi ye	100
+制敌于未动	zhi di yu wei dong	100
+先机也	xian ji ye	100
+构敌于为乱	gou di yu wei luan	100
+不赦也	bu she ye	100
+害敌于淫邪	hai di yu yin xie	100
+不耻也	bu chi ye	100
+敌之大	di zhi da	100
+无过不知	wu guo bu zhi	100
+祸之烈	huo zhi lie	100
+友敌为甚	you di wei shen	100
+使视人若寇	shi shi ren ruo kou	100
+待亲如疏	dai qin ru shu	100
+接友逾仇	jie you yu chou	100
+纵人之恶余	zong ren zhi e yu	100
+而避其害	er bi qi hai	100
+何损焉	he sun yan	100
+荣宠有初	rong chong you chu	100
+鲜有终者	xian you zhong zhe	100
+吉凶无常	ji xiong wu chang	100
+智者少祸	zhi zhe shao huo	100
+荣宠非命	rong chong fei ming	100
+谋之而后善	mou zhi er hou shan	100
+吉凶择人	ji xiong ze ren	100
+慎之方消衍	shen zhi fang xiao yan	100
+君命无违	jun ming wu wei	100
+荣之本也	rong zhi ben ye	100
+智者舍身亦存续	zhi zhe she shen yi cun xu	100
+后不乏人	hou bu fa ren	100
+荣之方久	rong zhi fang jiu	100
+贤者自苦亦惠嗣	xian zhe zi ku yi hui si	100
+官无定主	guan wu ding zhu	100
+百变以悦其君	bai bian yi yue qi jun	100
+君有幸臣	jun you xing chen	100
+无由亦须接纳	wu you yi xu jie na	100
+人孰无亲	ren shu wu qin	100
+罪人慎察其宗	zui ren shen cha qi zong	100
+人有贤愚	ren you xian yu	100
+任人勿求过己	ren ren wu qiu guo ji	100
+荣所众羡	rong suo zhong xian	100
+亦引众怨	yi yin zhong yuan	100
+示上以足	shi shang yi zu	100
+示下以惠	shi xia yi hui	100
+怨自削减	yuan zi xue jian	100
+大仇必去	da chou bi qu	100
+小人勿轻	xiao ren wu qing	100
+祸不可伏	huo bu ke fu	100
+喜怒无踪	xi nu wu zong	100
+慎思追远	shen si zhui yuan	100
+人所难图焉	ren suo nan tu yan	100
+世之道	shi zhi dao	100
+人不自害而人害也	ren bu zi hai er ren hai ye	100
+人之道	ren zhi dao	100
+人不恕己而自恕也	ren bu shu ji er zi shu ye	100
+君子惜名	jun zi xi ming	100
+小人爱身	xiao ren ai shen	100
+好名羁行	hao ming ji xing	100
+重利无亏	zhong li wu kui	100
+名德不昭	ming de bu zhao	100
+毁谤无损其身	hui bang wu sun qi shen	100
+义仁莫名	yi ren mo ming	100
+奸邪不以为患	jian xie bu yi wei huan	100
+阳以赞人	yang yi zan ren	100
+置其难堪而不觉	zhi qi nan kan er bu jue	100
+阴以行私	yin yi xing si	100
+攻其讳处而自存	gong qi hui chu er zi cun	100
+庶人莫与官争	shu ren mo yu guan zheng	100
+贵人不结人怨	gui ren bu jie ren yuan	100
+弱则保命	ruo ze bao ming	100
+不可作强	bu ke zuo qiang	100
+强则敛翼	qiang ze lian yi	100
+休求尽善	xiu qiu jin shan	100
+罪己宜苛	zui ji yi ke	100
+人怜不致大害	ren lian bu zhi da hai	100
+责人勿厉	ze ren wu li	100
+小惠或有大得	xiao hui huo you da de	100
+恶无定议	e wu ding yi	100
+莫以恶为恶者显	mo yi e wei e zhe xian	100
+善无定评	shan wu ding ping	100
+勿以善为善者安	wu yi shan wei shan zhe an	100
+自怜人怜	zi lian ren lian	100
+自弃人弃	zi qi ren qi	100
+心无滞碍	xin wu zhi ai	100
+害不侵矣	hai bu qin yi	100
+奸不自招	jian bu zi zhao	100
+忠不自辩	zhong bu zi bian	100
+奸者祸国	jian zhe huo guo	100
+忠者祸身	zhong zhe huo shen	100
+无智无以成奸	wu zhi wu yi cheng jian	100
+其智阴也	qi zhi yin ye	100
+有善无以为奸	you shan wu yi wei jian	100
+其知存也	qi zhi cun ye	100
+智不逾奸	zhi bu yu jian	100
+伐之莫胜	fa zhi mo sheng	100
+知不至大	zhi bu zhi da	100
+奸者难拒	jian zhe nan ju	100
+忠奸堪易也	zhong jian kan yi ye	100
+上所用者	shang suo yong zhe	100
+奸亦为忠	jian yi wei zhong	100
+上所弃者	shang suo qi zhe	100
+忠亦为奸	zhong yi wei jian	100
+势变而人非	shi bian er ren fei	100
+时迁而奸异	shi qian er jian yi	100
+其名难恃	qi ming nan shi	100
+惟上堪恃耳	wei shang kan shi er	100
+好恶生奸也	hao wu sheng jian ye	100
+人之敌	ren zhi di	100
+非奸亦奸	fei jian yi jian	100
+人之友	ren zhi you	100
+其奸亦忠	qi jian yi zhong	100
+道同方获其利	dao tong fang huo qi li	100
+道异惟受其害	dao yi wei shou qi hai	100
+奸有益	jian you yi	100
+人皆可为奸	ren jie ke wei jian	100
+忠致祸	zhong zhi huo	100
+人难以为忠	ren nan yi wei zhong	100
+奸众而忠寡	jian zhong er zhong gua	100
+世之实也	shi zhi shi ye	100
+言忠而恶奸	yan zhong er e jian	100
+世之表也	shi zhi biao ye	100
+惟上惟己	wei shang wei ji	100
+去表求实	qu biao qiu shi	100
+奸者自见矣	jian zhe zi jian yi	100
+上不谋臣	shang bu mou chen	100
+下或不治	xia huo bu zhi	100
+下不谋上	xia bu mou shang	100
+其身难晋	qi shen nan jin	100
+臣不谋僚	chen bu mou liao	100
+敌者勿去	di zhe wu qu	100
+官无恒友	guan wu heng you	100
+祸存斯须	huo cun si xu	100
+势之所然	shi zhi suo ran	100
+智者弗怠焉	zhi zhe fu dai yan	100
+料敌以远	liao di yi yuan	100
+须谋于今	xu mou yu jin	100
+去贼以尽	qu zei yi jin	100
+其谋无忌	qi mou wu ji	100
+欺君为大	qi jun wei da	100
+加诸罪无可免	jia zhu zui wu ke mian	100
+枉法不容	wang fa bu rong	100
+纵其为祸方惩	zong qi wei huo fang cheng	100
+上谋臣以势	shang mou chen yi shi	100
+势不济者以术	shi bu ji zhe yi shu	100
+下谋上以术	xia mou shang yi shu	100
+术有穷者以力	shu you qiong zhe yi li	100
+臣谋以智	chen mou yi zhi	100
+智无及者以害	zhi wu ji zhe yi hai	100
+事贵密焉	shi gui mi yan	100
+不密祸己	bu mi huo ji	100
+行贵速焉	xing gui su yan	100
+缓则人先	huan ze ren xian	100
+其功反罪	qi gong fan zui	100
+弥消其根	mi xiao qi gen	100
+其言设谬	qi yan she miu	100
+益增人厌	yi zeng ren yan	100
+行之不辍	xing zhi bu chuo	100
+不亦无敌乎	bu yi wu di hu	100
+法之善恶	fa zhi shan e	100
+莫以文也	mo yi wen ye	100
+乃其行焉	nai qi xing yan	100
+刑之本哉	xing zhi ben zai	100
+非罚罪也	fei fa zui ye	100
+乃明罪焉	nai ming zui yan	100
+人皆可罪	ren jie ke zui	100
+罪人须定其人	zui ren xu ding qi ren	100
+罪不自招	zui bu zi zhao	100
+密而举之则显	mi er ju zhi ze xian	100
+上不容罪	shang bu rong zui	100
+无谕则待	wu yu ze dai	100
+有谕则逮	you yu ze dai	100
+人辩乃常	ren bian nai chang	100
+审之勿悯	shen zhi wu min	100
+刑之非轻	xing zhi fei qing	100
+无不招也	wu bu zhao ye	100
+或以拒死	huo yi ju si	100
+畏罪释耳	wei zui shi er	100
+人无不党	ren wu bu dang	100
+罪一人可举其众	zui yi ren ke ju qi zhong	100
+供必不缺	gong bi bu que	100
+善修之毋违其真	shan xiu zhi wu wei qi zhen	100
+事至此也	shi zhi ci ye	100
+罪可定矣	zui ke ding yi	100
+人异而心异	ren yi er xin yi	100
+择其弱者以攻之	ze qi ruo zhe yi gong zhi	100
+其神必溃	qi shen bi kui	100
+身同而惧同	shen tong er ju tong	100
+以其至畏而刑之	yi qi zhi wei er xing zhi	100
+其人固屈	qi ren gu qu	100
+怜不可存	lian bu ke cun	100
+怜人者无证其忠	lian ren zhe wu zheng qi zhong	100
+友宜重惩	you yi zhong cheng	100
+援友者惟招其害	yuan you zhe wei zhao qi hai	100
+罪人或免人罪	zui ren huo mian ren zui	100
+难为亦为也	nan wei yi wei ye	100
+致人于死	zhi ren yu si	100
+莫逾构其反也	mo yu gou qi fan ye	100
+诱人以服	you ren yi fu	100
+非刑之无得焉	fei xing zhi wu de yan	100
+刑有术	xing you shu	100
+罚尚变	fa shang bian	100
+无所不施	wu suo bu shi	100
+人皆授首矣	ren jie shou shou yi	100
+智者畏祸	zhi zhe wei huo	100
+愚者惧刑	yu zhe ju xing	100
+言以诛人	yan yi zhu ren	100
+刑之极也	xing zhi ji ye	100
+明者识时	ming zhe shi shi	100
+顽者辩理	wan zhe bian li	100
+势以待人	shi yi dai ren	100
+罚之肇也	fa zhi zhao ye	100
+死之能受	si zhi neng shou	100
+痛之难忍	tong zhi nan ren	100
+刑人取其不堪	xing ren qu qi bu kan	100
+士不耐辱	shi bu nai ru	100
+人患株亲	ren huan zhu qin	100
+罚人伐其不甘	fa ren fa qi bu gan	100
+人不言罪	ren bu yan zui	100
+加其罪逾彼	jia qi zui yu bi	100
+证不可得	zheng bu ke de	100
+伪其证率真	wei qi zheng shuai zhen	100
+刑有不及	xing you bu ji	100
+陷无不至	xian wu bu zhi	100
+不患罪无名	bu huan zui wu ming	100
+患上不疑也	huan shang bu yi ye	100
+人刑者非刑也	ren xing zhe fei xing ye	100
+罚人者非罚也	fa ren zhe fei fa ye	100
+非人乃贱	fei ren nai jian	100
+非罚乃贵	fei fa nai gui	100
+贱则鱼肉	jian ze yu rou	100
+贵则生死	gui ze sheng si	100
+人之取舍	ren zhi qu she	100
+无乃得此乎	wu nai de ci hu	100
+事不至大	shi bu zhi da	100
+无以惊人	wu yi jing ren	100
+案不及众	an bu ji zhong	100
+功之匪显	gong zhi fei xian	100
+上以求安	shang yi qiu an	100
+下以邀宠	xia yi yao chong	100
+其冤固有	qi yuan gu you	100
+未可免也	wei ke mian ye	100
+荣以荣人者荣	rong yi rong ren zhe rong	100
+祸以祸人者祸	huo yi huo ren zhe huo	100
+荣非己莫恃	rong fei ji mo shi	100
+祸惟他勿纵	huo wei ta wu zong	100
+罪无实者	zui wu shi zhe	100
+他罪可代	ta zui ke dai	100
+恶无彰者	e wu zhang zhe	100
+人恶以附	ren e yi fu	100
+心之患者	xin zhi huan zhe	100
+置敌一党	zhi di yi dang	100
+情之怨者	qing zhi yuan zhe	100
+陷其奸邪	xian qi jian xie	100
+官之友	guan zhi you	100
+民之敌	min zhi di	100
+亲之友	qin zhi you	100
+仇之敌	chou zhi di	100
+敌者无常也	di zhe wu chang ye	100
+荣之友	rong zhi you	100
+败之敌	bai zhi di	100
+贱之友	jian zhi you	100
+贵之敌	gui zhi di	100
+友者有时也	you zhe you shi ye	100
+是以权不可废	shi yi quan bu ke fei	100
+废则失本	fei ze shi ben	100
+情不可滥	qing bu ke lan	100
+滥则人忌	lan ze ren ji	100
+人不可密	ren bu ke mi	100
+密则疑生	mi ze yi sheng	100
+心不可托	xin bu ke tuo	100
+托则祸伏	tuo ze huo fu	100
+智者不招己害	zhi zhe bu zhao ji hai	100
+能者寻隙求功	neng zhe xun xi qiu gong	100
+饵之以逮	er zhi yi dai	100
+事无悖矣	shi wu bei yi	100

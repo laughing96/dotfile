@@ -17,8 +17,8 @@ brew install \
   cmake 
 
 # echo "==> 程序开发交流"
-# brew install --cask \
-#     telegram \
+brew install --cask \
+    telegram \
 #     element 
 
 echo "==> GUI / 开发工具"
@@ -35,17 +35,17 @@ echo "==> 知识 / 效率"
 brew install --cask \
   obsidian \
   raindropio \
-  alfred \
+  alfred \ #Terminal 替代
   # bettermouse \
   # 1password \
   squirrel \
   # dash \
-  sip
+  sip # system integrity protection?
 
 echo "==> 截图 / 录屏"
 brew install --cask \
   shottr \
-  kap
+  kap # use
 
 echo "==> 影音"
 brew install --cask \

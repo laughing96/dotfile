@@ -50,6 +50,7 @@ import_tables:
   - luna_pinyin.emoji
   - luna_pinyin.sogou
   - luna_pinyin.zztj
+  - luna_pinyin.luozhi
 ...
 
 

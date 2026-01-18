@@ -1,3 +1,8 @@
+# 转义
+# 让 Ctrl + Left/Right 正常移动单词，不要转义序列
+bindkey '\e[1;5D' backward-word
+bindkey '\e[1;5C' forward-word
+
 # PATH env
 export PATH="/opt/homebrew/bin:$PATH"
 export PATH="/usr/local/opt/postgresql/bin:$PATH"
@@ -254,4 +259,7 @@ le() {
   | fzf -i --ansi --no-sort --tac --preview "sed -n \"\$(( {n}-5 )) , \$(( {n}+5 ))p\" $file"
 }
 
+
+# 加载 fish 风格历史补全
+source  ~/.zsh/auto_complete.sh
 eval "$(starship init zsh)"

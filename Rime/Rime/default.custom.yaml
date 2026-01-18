@@ -5,14 +5,14 @@ patch:
 
   switches:
     - name: ascii_mode
-      reset: 1
+      reset: 0
 
   schema_list:
     - schema: luna_pinyin_simp
 
   ascii_composer:
     # good_old_caps_lock: false
-    inline_ascii: true
+    inline_ascii: false
 
     switch_key:
       Caps_Lock: commit_code     # ⭐ 主中英切换

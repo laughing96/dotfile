@@ -38,8 +38,11 @@ vim.keymap.set("n", "<leader>h", ":nohlsearch<CR>")
 -- Prevent recursive silent feedback
 vim.keymap.set("i", "jk", "<Esc>", { noremap = true, silent = true })
 
--- vim python
-vim.g.python3_host_prog = " /Users/dl/.pyenv/shims/python"
+-- vim python 只支持Unix
+local python3 = vim.fn.exepath("python3")  -- 查找系统环境中的 python3
+if python3 ~= "" then
+    vim.g.python3_host_prog = python3
+end
 
 -- vim folder
 vim.wo.foldmethod = 'expr'
@@ -58,5 +61,8 @@ vim.diagnostic.config({
 
 
 if vim.fn.has('unix') == 1 and os.getenv("USER") == "root" then
-  vim.env.HOME = "/home/你的用户名"
+  vim.env.HOME = "/Users/dl"
 end
+
+-- translate
+vim.g.translator_target_lang = 'zh'

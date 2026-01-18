@@ -75,7 +75,7 @@ patch:
 
   switches:
     - name: ascii_mode
-      reset: 0
+      reset: 1
       states: ["中文", "西文"]
     - name: full_shape
       states: ["半角", "全角"]
@@ -97,6 +97,8 @@ patch:
     - { when: has_menu, accept: comma, send: Page_Up }
     # 句号：下一页
     - { when: has_menu, accept: period, send: Page_Down }
+    # enter 切换到 英文
+    - { when: composing, accept: Return, send: Commit, set_option: ascii_mode }
 
   engine:
     processors:

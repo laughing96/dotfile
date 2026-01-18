@@ -20,11 +20,14 @@ return {
 			"nvim-treesitter",
 		},
 		config = function()
+            local home = os.getenv('HOME')
+            local obsidian_path = home .. "/obsidian/dl note"
 			require("obsidian").setup({
 				workspaces = {
 					{
 						name = "dl note",
-						path = "/Users/dl/obsidian/dl note",
+						-- path = "/Users/dl/obsidian/dl note",
+						path = obsidian_path,
 					},
 				},
 				ui = {

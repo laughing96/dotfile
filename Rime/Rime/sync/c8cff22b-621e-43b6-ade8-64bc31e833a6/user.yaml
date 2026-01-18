@@ -1,7 +1,7 @@
 var:
-  last_build_time: 1768489181
+  last_build_time: 1768620767
   option:
-    ascii_punct: false
+    ascii_punct: true
     full_shape: false
     simplification: true
   previously_selected_schema: luna_pinyin

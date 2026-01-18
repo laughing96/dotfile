@@ -2,12 +2,12 @@ __build_info:
   rime_version: 1.16.0
   timestamps:
     default: 1768354364
-    default.custom: 1768487004
+    default.custom: 1768621312
     key_bindings: 1768354364
     key_bindings.custom: 0
     luna_pinyin.custom: 1768404257
     luna_pinyin.schema: 1768401969
-    luna_pinyin_simp.custom: 1768491494
+    luna_pinyin_simp.custom: 1768621676
     luna_pinyin_simp.schema: 1768354364
     punctuation: 1768354364
     punctuation.custom: 0
@@ -50,6 +50,7 @@ key_binder:
     - {accept: "Control+period", toggle: ascii_punct, when: always}
     - {accept: comma, send: Page_Up, when: has_menu}
     - {accept: period, send: Page_Down, when: has_menu}
+    - {accept: Return, send: Commit, set_option: ascii_mode, when: composing}
 menu:
   page_size: 8
 punctuator:
@@ -378,7 +379,7 @@ speller:
   delimiter: " '"
 switches:
   - name: ascii_mode
-    reset: 0
+    reset: 1
     states: ["中文", "西文"]
   - name: full_shape
     states: ["半角", "全角"]
