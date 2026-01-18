@@ -14,6 +14,7 @@ end
 vim.opt.runtimepath:prepend(lazypath)
 
 require("vim-options")
+require("reading").setup()
 
 
 require("lazy").setup("plugins")

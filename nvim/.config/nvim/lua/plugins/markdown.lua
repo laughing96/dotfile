@@ -1,15 +1,15 @@
 return {
-	{
-		"MeanderingProgrammer/render-markdown.nvim",
-
-		dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-tree/nvim-web-devicons" }, -- if you prefer nvim-web-devicons
-	},
-	config = function()
-		-- require("render-markdown").setup({
-		-- 	checkbox = { enabled = false },
-		-- 	indent = { enabled = true },
-		-- })
-	end,
+	-- {
+	-- 	"MeanderingProgrammer/render-markdown.nvim",
+	--
+	-- 	dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-tree/nvim-web-devicons" }, -- if you prefer nvim-web-devicons
+	-- },
+	-- config = function()
+	-- 	-- require("render-markdown").setup({
+	-- 	-- 	checkbox = { enabled = false },
+	-- 	-- 	indent = { enabled = true },
+	-- 	-- })
+	-- end,
 
 	{
 		"epwalsh/obsidian.nvim",
@@ -31,7 +31,7 @@ return {
 					},
 				},
 				ui = {
-					enable = false, -- Obsidian handles checkboxes correctly
+					enable = true, -- Obsidian handles checkboxes correctly
 				},
 				follow_url_func = function(url)
 					vim.fn.jobstart({ "open", url }) -- Mac OS
