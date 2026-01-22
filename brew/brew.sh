@@ -50,7 +50,10 @@ brew install --cask \
 echo "==> 影音"
 brew install --cask \
   iina \
-  spotify
+  spotify 
+  # jstkdng/programs/ueberzugpp # pic preview A LITTLE heavy
+
+
 
 echo "==> App Store 应用"
 mas install 1529448980   # Reeder 5

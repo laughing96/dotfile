@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+umount -f "$HOME/mnt/$1"
+

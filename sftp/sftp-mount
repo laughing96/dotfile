@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+set -e
+
+HOST=$1
+REMOTE=${2:-/}
+MNT=$HOME/mnt/$HOST
+
+mkdir -p "$MNT"
+
+if mount | grep -q "$MNT"; then
+  echo "$HOST already mounted"
+else
+  sshfs "$HOST:$REMOTE" "$MNT" \
+    -o reconnect,ServerAliveInterval=15,ServerAliveCountMax=3,follow_symlinks
+  echo "mounted $HOST"
+fi
+

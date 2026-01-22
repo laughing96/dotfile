@@ -1,0 +1,9 @@
+# 先定义：HOME 内全部生效
+[[rule]]
+path = "$HOME/**"
+mime = "inherit"
+
+# 再排除：mnt 子树（恢复系统 MIME）
+[[rule]]
+path = "$HOME/mnt/**"
+mime = "system"

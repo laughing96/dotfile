@@ -18,7 +18,7 @@ return {
    default_cursor_style = 'BlinkingBlock',
    cursor_blink_rate = 650,
 
-    window_background_opacity = 1.0,
+    window_background_opacity = 0.9,
 
    -- color scheme
    colors = colors,

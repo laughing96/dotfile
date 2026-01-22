@@ -1,3 +1,11 @@
+# sftp-mount
+## usage
+- stow sftp -t ~/.local/bin
+- sftp-mount <ssh HOST> <要挂载的远端绝对路径>
+- sftp-umount <ssh Host> 强制卸载
+
+
+
 # Appreciate 
 Thanks to the open-source developers for creating such awesome software, to those who share their configuration files, and to everyone who makes videos for beginners.
 
