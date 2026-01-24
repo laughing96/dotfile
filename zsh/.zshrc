@@ -32,11 +32,19 @@ export PYTHON_BUILD_CURL_OPTS=" -x localhost:20171"
 export PYENV_ROOT="$HOME/.pyenv"
 [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init - zsh)"
+# ~/.zshrc
 
-# nvm
+# 1. Zsh 补全
+autoload -U compinit && compinit
+
+# 2. 兼容 Bash 补全
+autoload -U bashcompinit && bashcompinit
+
+# 3. 加载 nvm bash_completion（可选）
 export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+[ -s "$NVM_DIR/bash_completion" ] && source "$NVM_DIR/bash_completion"
+[ -s "$NVM_DIR/nvm.sh" ] && source "$NVM_DIR/nvm.sh"
+
 ## place this after nvm initialization!
 autoload -U add-zsh-hook
 
