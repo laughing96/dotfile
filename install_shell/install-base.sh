@@ -37,7 +37,7 @@ echo "Detected OS: $OS, Package Manager: $PACKAGE_MANAGER"
 # --------------------------
 install_arch() {
     sudo pacman -Syu --needed --noconfirm \
-        base-devel gcc make git lazygit exuberant-ctags \
+        base-devel gcc make git git-delta lazygit exuberant-ctags \
         ncurses libelf openssl bison flex bc dwarves zstd esmtp mutt
 }
 
