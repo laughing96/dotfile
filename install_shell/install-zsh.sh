@@ -102,3 +102,64 @@ echo "- Add starship prompt: eval \"\$(starship init zsh)\" in your .zshrc"
 echo "- Source ~/.zsh/auto_complete.sh if you have it"
 
 
+||||||| parent of a0d703a (feat: 安装zsh的脚本)
+=======
+#!/usr/bin/env bash
+# install_tools.sh
+# 根据系统自动安装常用开发工具和命令行软件
+
+set -e
+
+# --------------------------
+# 1. 系统检测
+# --------------------------
+OS=""
+PACKAGE_MANAGER=""
+
+if [[ "$OSTYPE" == "darwin"* ]]; then
+    OS="macos"
+    PACKAGE_MANAGER="brew"
+elif [ -f /etc/os-release ]; then
+    . /etc/os-release
+    if [[ "$ID" == "arch" || "$ID_LIKE" =~ "arch" ]]; then
+        OS="arch"
+        PACKAGE_MANAGER="pacman"
+    elif [[ "$ID" == "ubuntu" || "$ID" == "debian" ]]; then
+        OS="debian"
+        PACKAGE_MANAGER="apt"
+    else
+        echo "Unsupported Linux distro: $ID"
+        exit 1
+    fi
+else
+    echo "Unsupported OS: $OSTYPE"
+    exit 1
+fi
+
+echo "Detected OS: $OS, Package Manager: $PACKAGE_MANAGER"
+
+# --------------------------
+# 2. 安装函数
+# --------------------------
+install_packages_arch() {
+    sudo pacman -Syu --needed --noconfirm \
+        zsh fzf bat ripgrep fd htop tmux trash-cli starship python-pyenv nodejs npm eza
+}
+
+install_packages_debian() {
+    sudo apt update
+    sudo apt install -y \
+        zsh fzf bat ripgrep fd-find htop tmux trash-cli starship python3-pyenv nodejs npm eza
+}
+
+install_packages_macos() {
+    # 确保 brew 安装了
+    if ! command -v brew >/dev/null 2>&1; then
+        echo "Homebrew not found. Installing..."
+        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    fi
+
+    brew update
+    brew install \
+        zsh fzf bat ripgrep fd htop tmux trash starship pyenv nvm eza
+}
