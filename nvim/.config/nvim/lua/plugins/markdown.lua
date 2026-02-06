@@ -1,15 +1,24 @@
 return {
+	{
+		"MeanderingProgrammer/render-markdown.nvim",
+
+		dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-tree/nvim-web-devicons" }, -- if you prefer nvim-web-devicons
+	},
+	config = function()
+		require("render-markdown").setup({
+			checkbox = { enabled = false },
+			indent = { enabled = true },
+		})
+	end,
 	-- {
-	-- 	"MeanderingProgrammer/render-markdown.nvim",
-	--
-	-- 	dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-tree/nvim-web-devicons" }, -- if you prefer nvim-web-devicons
+	-- 	"iamcco/markdown-preview.nvim",
+	-- 	cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
+	-- 	build = "cd app && yarn install",
+	-- 	init = function()
+	-- 		vim.g.mkdp_filetypes = { "markdown" }
+	-- 	end,
+	-- 	ft = { "markdown" },
 	-- },
-	-- config = function()
-	-- 	-- require("render-markdown").setup({
-	-- 	-- 	checkbox = { enabled = false },
-	-- 	-- 	indent = { enabled = true },
-	-- 	-- })
-	-- end,
 
 	{
 		"epwalsh/obsidian.nvim",
@@ -19,9 +28,9 @@ return {
 			"nvim-telescope/telescope.nvim",
 			"nvim-treesitter",
 		},
-		config = function()
-            local home = os.getenv('HOME')
-            local obsidian_path = home .. "/obsidian/dl note"
+    	config = function()
+			local home = os.getenv("HOME")
+			local obsidian_path = home .. "/obsidian/dl note"
 			require("obsidian").setup({
 				workspaces = {
 					{
@@ -31,12 +40,24 @@ return {
 					},
 				},
 				ui = {
-					enable = true, -- Obsidian handles checkboxes correctly
+					enable = false, -- Obsidian handles checkboxes correctly
 				},
+				templates = {
+					folder = "templates",
+					date_format = "%Y-%m-%d-%a",
+					time_format = "%H:%M",
+				},
+
 				follow_url_func = function(url)
 					vim.fn.jobstart({ "open", url }) -- Mac OS
 				end,
 			})
-		end,
+
+        end,
+        vim.keymap.set('n',"<leader>obb","<cmd>ObsidianBacklinks<cr>", {desc = "Backlinks"})
+        -- keys = {
+        --     {"<leader>obb", "<cmd>ObsidianBacklinks<cr>", desc= "Backlinks"},
+        -- },
+	
 	},
 }
