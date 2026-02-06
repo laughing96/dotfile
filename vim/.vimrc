@@ -5,8 +5,12 @@ let $PATH = '/Users/dl/.cargo/bin' . $PATH
 "" Enable LSP debug logging
 "lua vim.lsp.set_log_level("debug")
 
-let mapleader = " "
-
+if has("eval")
+  let mapleader = " "
+endif
+inoremap jk <esc>
+vnoremap jk <esc>
+inoremap <c-d> <esc>ddi
 nnoremap <Leader>w :w<CR>
 nnoremap <Leader>q :q<CR>
 set mouse=v
@@ -42,10 +46,6 @@ set updatetime=300
 " Always show the signcolumn, otherwise it would shift the text each time
 " diagnostics appear/become resolved
 set signcolumn=yes
-
-inoremap jk <esc>
-vnoremap jk <esc>
-inoremap <c-d> <esc>ddi
 
 
 ""lua require('nvim-treesitter').setup()
