@@ -17,24 +17,24 @@ return {
 		"hrsh7th/cmp-nvim-lsp",
 		lazy = false,
 	},
-	{
-		"simrat39/rust-tools.nvim",
-		config = function()
-			vim.lsp.config["rust-tools"] = {
-				server = {
-					settings = {
-						["rust-analyzer"] = {
-							cargo = { allFeatures = true },
-							checkOnSave = true,
-							["checkOnSave.command"] = "clippy",
-							procMacro = { enable = true },
-						},
-					},
-				},
-			}
-			vim.lsp.enable("rust-tools")
-		end,
-	},
+	-- {
+	-- 	"simrat39/rust-tools.nvim",
+	-- 	config = function()
+	-- 		vim.lsp.config["rust-tools"] = {
+	-- 			server = {
+	-- 				settings = {
+	-- 					["rust-analyzer"] = {
+	-- 						cargo = { allFeatures = true },
+	-- 						checkOnSave = true,
+	-- 						["checkOnSave.command"] = "clippy",
+	-- 						procMacro = { enable = true },
+	-- 					},
+	-- 				},
+	-- 			},
+	-- 		}
+	-- 		vim.lsp.enable("rust-tools")
+	-- 	end,
+	-- },
 	{
 		"neovim/nvim-lspconfig",
 		lazy = false,
@@ -55,6 +55,7 @@ return {
 			vim.lsp.enable("taplo")
 
 			-- Harper (disable formatting so it doesn't fight taplo)
+			-- English
 			vim.lsp.config["harper_ls"] = {
 				on_attach = function(client)
 					client.server_capabilities.documentFormattingProvider = false
@@ -62,34 +63,20 @@ return {
 			}
 			vim.lsp.enable("harper_ls")
 
-			-- vim.lsp.config["vue_ls"] = {
-			--     filetypes = { "vue" },
-			--     init_options = {
-			--         typescript = {
-			--             tsdk = vim.fn.expand(
-			--                 vim.fn.stdpath("data") ..
-			--                 "/mason/packages/typescript-language-server/node_modules/typescript/lib"
-			--             ),
-			--         },
-			--         vue = { hybridMode = false },
-			--     },
-			-- }
-			-- vim.lsp.enable("vue_ls")
-			-- vim.lsp.enable("ts_ls")
-
-			-- managed to get vue-language-server working with tsserver following https://github.com/vuejs/language-tools/wiki/Neovim
+            -- vue
 			local vue_language_server_path = vim.fn.stdpath("data")
 				.. "/mason/packages/vue-language-server/node_modules/@vue/language-server"
-
+	
+			local tsserver_filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" }
 			local vue_plugin = {
 				name = "@vue/typescript-plugin",
 				location = vue_language_server_path,
 				languages = { "vue" },
 				configNamespace = "typescript",
 			}
-			local tsserver_config = {
+			local vtsls_config = {
 				settings = {
-					tsserver = {
+					vtsls = {
 						tsserver = {
 							globalPlugins = {
 								vue_plugin,
@@ -97,22 +84,32 @@ return {
 						},
 					},
 				},
-				filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" },
+				filetypes = tsserver_filetypes,
 			}
 
+			local ts_ls_config = {
+				init_options = {
+					plugins = {
+						vue_plugin,
+					},
+				},
+				filetypes = tsserver_filetypes,
+			}
+
+			-- If you are not on most recent `nvim-lspconfig` or you want to override
 			local vue_ls_config = {
 				on_init = function(client)
 					client.handlers["tsserver/request"] = function(_, result, context)
-						local clients = vim.lsp.get_clients({ bufnr = context.bufnr })
+						local ts_clients = vim.lsp.get_clients({ bufnr = context.bufnr, name = "ts_ls" })
+						local vtsls_clients = vim.lsp.get_clients({ bufnr = context.bufnr, name = "vtsls" })
+						local clients = {}
 
-						for _, c in ipairs(clients) do
-							print(c.name, c.config.cmd[1])
-						end
-						local clients = vim.lsp.get_clients({ bufnr = context.bufnr, name = "tsserver" })
+						vim.list_extend(clients, ts_clients)
+						vim.list_extend(clients, vtsls_clients)
 
 						if #clients == 0 then
 							vim.notify(
-								"Could not found `tsserver` lsp client, vue_lsp would not work without it.",
+								"Could not find `vtsls` or `ts_ls` lsp client, `vue_ls` would not work without it.",
 								vim.log.levels.ERROR
 							)
 							return
@@ -129,7 +126,11 @@ return {
 								payload,
 							},
 						}, { bufnr = context.bufnr }, function(_, r)
-							local response_data = { { id, r.body } }
+							local response = r and r.body
+							-- TODO: handle error or response nil here, e.g. logging
+							-- NOTE: Do NOT return if there's an error or no response, just return nil back to the vue_ls to prevent memory leak
+							local response_data = { { id, response } }
+
 							---@diagnostic disable-next-line: param-type-mismatch
 							client:notify("tsserver/response", response_data)
 						end)
@@ -137,9 +138,16 @@ return {
 				end,
 			}
 			-- nvim 0.11 or above
-			vim.lsp.config("tsserver", tsserver_config)
+			vim.lsp.config("vtsls", vtsls_config)
 			vim.lsp.config("vue_ls", vue_ls_config)
-			vim.lsp.enable({ "tsserver", "vue_ls" })
+			vim.lsp.config("ts_ls", ts_ls_config)
+			vim.lsp.enable({ "ts_ls", "vue_ls" }) -- If using `ts_ls` replace `vtsls` to `ts_ls`
+
+
+            -- python
+            vim.lsp.config("pyright",{})
+            vim.lsp.enable("pyright")
+
 			vim.lsp.config("clangd", {
 				cmd = { "clangd", "--background-index" },
 				filetypes = { "c", "cpp", "objc", "objcpp" },
@@ -148,9 +156,9 @@ return {
 			vim.lsp.enable("clangd")
 
 			vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
-			vim.keymap.set("n", "<leader>gd", vim.lsp.buf.definition, {desc="definition"})
-			vim.keymap.set("n", "<leader>gr", vim.lsp.buf.references, {desc="references"})
-			vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, {desc="code action"})
+			vim.keymap.set("n", "<leader>gd", vim.lsp.buf.definition, { desc = "definition" })
+			vim.keymap.set("n", "<leader>gr", vim.lsp.buf.references, { desc = "references" })
+			vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "code action" })
 
 			-- Only format TOML with taplo
 			vim.api.nvim_create_autocmd("BufWritePre", {
