@@ -5,6 +5,7 @@ bindkey '\e[1;5C' forward-word
 
 # PATH env
 export PATH="/opt/homebrew/bin:$PATH"
+export PATH="/opt/homebrew/opt/trash/bin:$PATH"
 export PATH="/usr/local/opt/postgresql/bin:$PATH"
 export PATH="$HOME/.tmuxifier/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
@@ -24,7 +25,10 @@ export https_proxy="http://${proxy_ip}:20171"
 export sock_proxy="socks5://${proxy_ip}:20170"
 
 export PYTHON_BUILD_CURL_OPTS=" -x localhost:20171" 
+
 # export ALL_PROXY=" -x localhost:20171"
+# hugging face
+export HF_ENDPOINT=https://hf-mirror.com
 
 # 自启动
 #
@@ -254,9 +258,17 @@ r() {
 }
 
 
+# lf() {
+#   local file="${1:?usage: ltf <logfile>}"
+#   tail -f "$file" | fzf -i --ansi --no-sort --tac
+# }
+
 lf() {
-  local file="${1:?usage: ltf <logfile>}"
-  tail -f "$file" | fzf -i --ansi --no-sort --tac
+  local file="${1:?usage: lf <logfile>}"
+  tail -n 10000 -f "$file" | \
+    fzf --ansi --no-sort --tac --wrap \
+        --preview 'echo {}' \
+        --preview-window=right:60:wrap
 }
 
 
@@ -270,4 +282,5 @@ le() {
 
 # 加载 fish 风格历史补全
 source  ~/.zsh/auto_complete.sh
+source ~/.zsh/ai_env.sh
 eval "$(starship init zsh)"
