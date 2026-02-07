@@ -11,6 +11,8 @@ export PATH="$HOME/.tmuxifier/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
 
+export XDG_CONFIG_HOME="$HOME/.config"
+
 #In short, Tmuxifier allows you to easily create, edit, and load "layout" files, which are simple shell scripts where you use the tmux command and helper commands provided by tmuxifier to manage Tmux sessions and windows
 # eval "$(tmuxifier init -)"
 eval "$(zoxide init zsh)"
@@ -116,6 +118,7 @@ alias cat='bat'
 alias grep='rg'
 alias find='fd'
 
+
 # 编辑
 alias v='nvim'
 alias vi='nvim'
@@ -129,8 +132,13 @@ alias rm='trash'
 # git（轻量）
 alias lg='lazygit'
 alias g='git'
-alias gs='git status -sb'
+#alias gs='git status -sb'
 alias gl='git log --oneline --graph --decorate'
+alias gf="git fetch"
+alias gsb="git status -sb"
+
+# lazysql
+alias sql='lazysql'
 
 # 进程
 alias ps='ps aux'
