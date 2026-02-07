@@ -18,3 +18,9 @@ Thanks to the open-source developers for creating such awesome software, to thos
 [wezterm_config](https://github.com/KevinSilvester/wezterm-config)<br>
 [yazi](https://yazi-rs.github.io/docs/installation)<br>
 [zsh](https://ohmyz.sh/)<br>
+[lazysql](https://github.com/jorgerojas26/lazysql?tab=readme-ov-file#example-connection-urls)
+
+
+# Records
+## lazysql
+

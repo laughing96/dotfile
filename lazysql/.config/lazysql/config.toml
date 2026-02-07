@@ -2,3 +2,17 @@
 Name = 'menu-sqlite'
 Provider = 'sqlite3'
 URL = 'file:/Users/dl/Code/backend/db.sqlite3?loc=auto'
+
+[[database]]
+Name = "k8s-postgres"
+Provider = "postgres"
+URL = "postgres://demo:demo@127.0.0.1:15432/demo?sslmode=disable"
+[[database]]
+Name = 'container'
+Provider = 'postgres'
+DBName = 'foo'
+URL = 'postgres://postgres:password@localhost:${port}/foo'
+Commands = [
+    { Command = 'ssh -tt remote-bastion -L 6443:localhost:6443', WaitForPort = '6443' },
+    { Command = 'kubectl port-forward service/postgres ${port}:5432 --kubeconfig /path/to/kube.conf', WaitForPort = '${port}' },
+]
