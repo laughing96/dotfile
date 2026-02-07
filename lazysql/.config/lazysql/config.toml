@@ -1,0 +1,4 @@
+[[database]]
+Name = 'menu-sqlite'
+Provider = 'sqlite3'
+URL = 'file:/Users/dl/Code/backend/db.sqlite3?loc=auto'
