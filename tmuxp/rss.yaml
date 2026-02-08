@@ -1,0 +1,35 @@
+session_name: rss-reader
+windows:
+- focus: 'true'
+  layout: b5ef,168x41,0,0[168x29,0,0,1,168x11,0,30,2]
+  options:
+    automatic-rename: false
+  panes:
+  - focus: 'true'
+    shell_command: ''
+  - zsh
+  start_directory: /Users/dl/Code/k8s/hackernews-reader
+  window_name: source-code
+- layout: b400,168x41,0,0,3
+  options:
+    automatic-rename: false
+  panes:
+  - opencode
+  start_directory: /Users/dl/Code/k8s/hackernews-reader
+  window_name: opencode
+- layout: b401,168x41,0,0,4
+  options:
+    automatic-rename: false
+  panes:
+  - focus: 'true'
+    shell_command: lazysql
+  start_directory: /Users/dl/Code/k8s/hackernews-reader
+  window_name: database-sql
+- layout: b402,168x41,0,0,5
+  options:
+    automatic-rename: false
+  panes:
+  - focus: 'true'
+    shell_command: zsh
+  start_directory: /Users/dl/obsidian/dl note
+  window_name: note record

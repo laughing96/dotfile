@@ -18,7 +18,7 @@ export XDG_CONFIG_HOME="$HOME/.config"
 eval "$(zoxide init zsh)"
 
 proxy_ip=127.0.0.1
-no_proxy="127.0.0.1,localhost,.localdomain.com"
+no_proxy="127.0.0.1,localhost,.localdomain.com,192.168.*.*"
 no_proxy=$no_proxy,${proxy_ip}
 export no_proxy
 
@@ -101,6 +101,9 @@ export PKG_CONFIG_PATH="/opt/homebrew/opt/readline/lib/pkgconfig:/opt/homebrew/o
 # tmux
 alias ta='tmux new-session -A -s main'
 alias tm='tmux'
+
+rss_yaml="/Users/dl/Code/k8s/hackernews-reader/rss.yaml"
+alias rsst="tmuxp load $rss_yaml" 
 # ls 系列（现代化）
 alias ls='eza --icons --group-directories-first'
 alias ll='eza -lh --icons --group-directories-first'
@@ -115,9 +118,8 @@ alias ...='cd ../..'
 alias cat='bat'
 
 # grep / find
-alias grep='rg'
-alias find='fd'
-
+# alias grep='rg'
+# alias find='fd'
 
 # 编辑
 alias v='nvim'

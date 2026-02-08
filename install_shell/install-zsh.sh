@@ -45,7 +45,7 @@ install_packages_arch() {
     fi
 
     sudo pacman -Syu --needed --noconfirm \
-        zsh fzf bat ripgrep fd htop tmux trash-cli starship nodejs npm eza  zoxide
+        zsh fzf bat ripgrep fd htop tmux tmuxp trash-cli starship nodejs npm eza  zoxide
 }
 
 install_packages_debian() {
