@@ -4,15 +4,14 @@ Provider = 'sqlite3'
 URL = 'file:/Users/dl/Code/backend/db.sqlite3?loc=auto'
 
 [[database]]
-Name = "k8s-postgres"
-Provider = "postgres"
-URL = "postgres://demo:demo@127.0.0.1:15432/demo?sslmode=disable"
-[[database]]
-Name = 'container'
+Name = 'Rss-reader'
 Provider = 'postgres'
-DBName = 'foo'
-URL = 'postgres://postgres:password@localhost:${port}/foo'
+DBName = 'hackernews'
+URL = 'postgresql://hacker:hacker123@postgres.hackernews.svc.cluster.local:5432/hackernews?sslmode=disable'
 Commands = [
-    { Command = 'ssh -tt remote-bastion -L 6443:localhost:6443', WaitForPort = '6443' },
-    { Command = 'kubectl port-forward service/postgres ${port}:5432 --kubeconfig /path/to/kube.conf', WaitForPort = '${port}' },
+    { Command = 'kubectl -n hackernews port-forward service/postgres 5432:5432 ', WaitForPort = '5432' },
 ]
+[[database]]
+Name = 'pre-commit'
+Provider = 'sqlite3'
+URL = 'file:/Users/dl/.cache/pre-commit/db.db?loc=auto'
