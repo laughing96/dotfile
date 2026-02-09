@@ -30,11 +30,11 @@ return {
 		},
     	config = function()
 			local home = os.getenv("HOME")
-			local obsidian_path = home .. "/obsidian/dl note"
+			local obsidian_path = home .. "/obsidian/mynote"
 			require("obsidian").setup({
 				workspaces = {
 					{
-						name = "dl note",
+						name = "mynote",
 						-- path = "/Users/dl/obsidian/dl note",
 						path = obsidian_path,
 					},
