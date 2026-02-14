@@ -10,15 +10,6 @@ return {
 			indent = { enabled = true },
 		})
 	end,
-	-- {
-	-- 	"iamcco/markdown-preview.nvim",
-	-- 	cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
-	-- 	build = "cd app && yarn install",
-	-- 	init = function()
-	-- 		vim.g.mkdp_filetypes = { "markdown" }
-	-- 	end,
-	-- 	ft = { "markdown" },
-	-- },
 	-- pic
 	{
 		"vhyrro/luarocks.nvim",
@@ -26,6 +17,7 @@ return {
 		lazy = false, -- 启动时就加载
 		opts = {
 			rocks = { "magick" }, -- 显式要求安装 magick
+			lua_version = "5.1",
 		},
 	},
 	{
@@ -38,6 +30,7 @@ return {
 
 		opts = {
 			backend = "ueberzug", -- 如果用 WezTerm，这里也可以改为 "ueberzug" 或保持自动检测
+			processor = "magick_rock",
 			integrations = {
 				telescope = {
 					enabled = true,
@@ -51,7 +44,7 @@ return {
 					filetypes = { "markdown", "vimwiki", "obsidian" }, -- 兼容 Obsidian 笔记
 				},
 				neorg = {
-					enabled = true,
+					enabled = false,
 				},
 			},
 			max_width = 100, -- 图片最大宽度
@@ -62,7 +55,7 @@ return {
 			window_overlap_clear_ft_ignore = { "cmp_menu", "cmp_docs", "" },
 			editor_only_render_when_focused = false, -- 失去焦点时是否保留图片
 			tmux_show_only_in_active_window = false, -- Tmux 兼容性
-			hijack_file_patterns = { "*.png", "*.jpg", "*.jpeg", "*.gif", "*.webp" }, -- 直接打开图片文件
+			hijack_file_patterns = { "*.png", "*.jpg", "*.jpeg", "*.gif", "*.webp", "helf" }, -- 直接打开图片文件
 		},
 	},
 	{
