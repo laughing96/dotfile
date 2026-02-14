@@ -4,13 +4,12 @@ Status:children_add(function()
 		return ""
 	end
 
-	return ui.Line {
+	return ui.Line({
 		ui.Span(ya.user_name(h.cha.uid) or tostring(h.cha.uid)):fg("magenta"),
 		":",
 		ui.Span(ya.group_name(h.cha.gid) or tostring(h.cha.gid)):fg("magenta"),
 		" ",
-	}
-
+	})
 end, 500, Status.RIGHT)
 
 Status:children_add(function(self)
@@ -21,10 +20,38 @@ Status:children_add(function(self)
 		return ""
 	end
 end, 3300, Status.LEFT)
+-- ~/.config/yazi/init.lua
+function Linemode:size_and_perm()
+	local size = self._file:size()
+
+	if size then
+		size = ya.readable_size(size)
+	else
+		local folder = cx.active:history(self._file.url)
+		size = folder and tostring(#folder.files) or ""
+	end
+	local perm = self._file.cha:perm() or ""
+
+	return string.format("%s %s", size, perm)
+end
+
+function Linemode:size_and_mtime()
+	local time = math.floor(self._file.cha.mtime or 0)
+	if time == 0 then
+		time = ""
+	elseif os.date("%Y", time) == os.date("%Y") then
+		time = os.date("%b %d %H:%M", time)
+	else
+		time = os.date("%b %d  %Y", time)
+	end
+
+	local size = self._file:size()
+	return string.format("%s %s", size and ya.readable_size(size) or "-", time)
+end
 
 -- ~/.config/yazi/init.lua
 require("bookmarks"):setup({
-	last_directory = { enable = false, persist = false, mode="dir" },
+	last_directory = { enable = false, persist = false, mode = "dir" },
 	persist = "none",
 	desc_format = "full",
 	file_pick_mode = "hover",
@@ -41,8 +68,7 @@ require("bookmarks"):setup({
 	},
 })
 
-
-require("mactag"):setup {
+require("mactag"):setup({
 	-- Keys used to add or remove tags
 	keys = {
 		o = "todo",
@@ -51,17 +77,16 @@ require("mactag"):setup {
 		r = "review",
 		d = "done",
 		a = "archive",
-        t = "temp"
-
+		t = "temp",
 	},
 	-- Colors used to display tags
 	colors = {
-		todo = "#ee7b70", --red 
+		todo = "#ee7b70", --red
 		doing = "#f59e0b", -- orange
 		blocked = "#fbe764", --- yellow
-		review = "#91fc87", -- green 
+		review = "#91fc87", -- green
 		done = "#5fa3f8", -- blue
-		archive = "#cb88f8", -- purple 
-        temp = "#111111",
+		archive = "#cb88f8", -- purple
+		temp = "#111111",
 	},
-}
+})

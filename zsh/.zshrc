@@ -10,6 +10,7 @@ export PATH="/usr/local/opt/postgresql/bin:$PATH"
 export PATH="$HOME/.tmuxifier/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
+export DYLD_FALLBACK_LIBRARY_PATH="$(brew --prefix)/lib:$DYLD_FALLBACK_LIBRARY_PATH"
 
 export XDG_CONFIG_HOME="$HOME/.config"
 

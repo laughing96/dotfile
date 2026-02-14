@@ -4,12 +4,12 @@
 
 [mgr]
 ratio = [1, 4, 3]
-sort_by = "alphabetical"
+sort_by = "mtime"
 sort_sensitive = false
-sort_reverse = false
+sort_reverse = true
 sort_dir_first = true
 sort_translit = false
-linemode = "none"
+linemode = "size_and_perm"         #size permission mtime
 show_hidden = true
 show_symlink = true
 scrolloff = 5
@@ -23,9 +23,7 @@ max_width = 600
 max_height = 900
 cache_dir = ""
 image_delay = 30
-# image_backend = 'kitty'
-# image_filter = "triangle"
-image_filter = "ueberzugpp"
+image_filter = "triangle"
 image_quality = 75
 ueberzug_scale = 1
 ueberzug_offset = [0, 0, 0, 0]
@@ -62,6 +60,7 @@ play = [
     { run = '''mediainfo "$1"; echo "Press enter to exit"; read _''', block = true, desc = "Show media info", for = "unix" },
 ]
 pdf = [{ run = 'open -a PDFgear "$@"', orphan = true, for = 'unix' }]
+img = [{ run = 'chafa "$@"', orphan = true, for = 'unix' }]
 
 [open]
 rules = [
@@ -72,6 +71,7 @@ rules = [
     ] },
     # Image
     { mime = "image/*", use = [
+        "img",
         "open",
         "reveal",
     ] },
@@ -181,6 +181,7 @@ prepend_previewers = [
     #linux
     # { mime = "image/*", run = "ueberzugpp layer --silent --parser kitty" },
 
+    { mime = "image/heic", run = "heic" },
     { mime = "image/*", run = "image" },
     # { mime = "image/{avif,hei?,jxl,png}", run = "magick" },
     # { mime = "image/svg+xml", run = "svg" },
