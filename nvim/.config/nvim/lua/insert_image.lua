@@ -9,12 +9,12 @@ local function smart_image_insert()
     local before_cursor = line:sub(1, col)
 
     -- 判断是插入图片链接还是普通链接
-    local is_image = before_cursor:match("!%[%]$") or before_cursor:match("!%[%]$")
+    local is_image = before_cursor:match("!%[.-%]$")
     local find_command = { "fd", "--type", "f" }
     
     if is_image then
         -- 如果是 ![] 则只搜寻图片格式
-        find_command = { "fd", "--type", "f", "-e", "png", "-e", "jpg", "-e", "jpeg", "-e", "gif", "-e", "webp" }
+        find_command = { "fd", "--type", "f", "-e", "png", "-e", "jpg", "-e", "jpeg", "-e", "gif", "-e", "webp", "-e" ,"heif", }
     end
 
     builtin.find_files({

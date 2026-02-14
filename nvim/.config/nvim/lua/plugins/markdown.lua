@@ -10,13 +10,12 @@ return {
 			indent = { enabled = true },
 		})
 	end,
-	-- pic
 	{
 		"vhyrro/luarocks.nvim",
 		priority = 1001, -- 优先级调最高
 		lazy = false, -- 启动时就加载
 		opts = {
-			rocks = { "magick" }, -- 显式要求安装 magick
+			rocks = { "dkjson", "magick" }, -- 显式要求安装 magick
 			lua_version = "5.1",
 		},
 	},
@@ -25,12 +24,12 @@ return {
 		event = "VeryLazy",
 		dependencies = {
 			-- 必须要安装 luarocks 才能驱动 magick
-			{ "luarocks.nvim" },
+			{ "vhyrro/luarocks.nvim" },
 		},
 
 		opts = {
 			backend = "ueberzug", -- 如果用 WezTerm，这里也可以改为 "ueberzug" 或保持自动检测
-			processor = "magick_rock",
+			processor = "magick_cli",
 			integrations = {
 				telescope = {
 					enabled = true,
@@ -41,6 +40,8 @@ return {
 					download_remote_images = true,
 					only_render_image_at_cursor = true, -- 是否只显示光标下的图片
 					only_render_image_at_cursor_mode = "popup", -- "popup" or "inline", defaults to "popup"
+
+					floating_windows = false, -- if true, images will be rendered in floating markdown windows
 					filetypes = { "markdown", "vimwiki", "obsidian" }, -- 兼容 Obsidian 笔记
 				},
 				neorg = {
@@ -48,14 +49,17 @@ return {
 				},
 			},
 			max_width = 100, -- 图片最大宽度
-			max_height = 20, -- 图片最大高度
-			max_width_window_percentage = nil,
+			max_height = 10, -- 图片最大高度
+			max_width_window_percentage = 50,
 			max_height_window_percentage = 50,
 			window_overlap_clear_enabled = true, -- 浮窗覆盖时是否清除图片
 			window_overlap_clear_ft_ignore = { "cmp_menu", "cmp_docs", "" },
 			editor_only_render_when_focused = false, -- 失去焦点时是否保留图片
-			tmux_show_only_in_active_window = false, -- Tmux 兼容性
-			hijack_file_patterns = { "*.png", "*.jpg", "*.jpeg", "*.gif", "*.webp", "helf" }, -- 直接打开图片文件
+			tmux_show_only_in_active_window = true, -- Tmux 兼容性
+			hijack_file_patterns = { "*.png", "*.jpg", "*.jpeg", "*.gif", "*.webp", }, -- 直接打开图片文件
+			-- rocks = {
+			-- 	hererocks = true, -- 🔥关键
+			-- },
 		},
 	},
 	{
@@ -77,16 +81,16 @@ return {
 						path = obsidian_path,
 					},
 				},
-				-- daily_notes = {
-				-- 	folder = "Daliy",
-				-- 	date_format = "%Y-%m-%d",
-				-- 	default_tags = {},
-				-- 	template = "templates/DailyTemp.md",
-				-- },
-				-- completion = {
-				-- 	nvim_cmp = true,
-				-- 	min_chars = 1,
-				-- },
+				daily_notes = {
+					folder = "Daily",
+					date_format = "%Y-%m-%d",
+					default_tags = {},
+					template = obsidian_path .. "/templates/DailyTemp.md",
+				},
+				completion = {
+					nvim_cmp = true,
+					min_chars = 1,
+				},
 
 				ui = {
 					enable = false, -- Obsidian handles checkboxes correctly
@@ -122,13 +126,20 @@ return {
 						return string.format("![%s](%s)", path.name, path)
 					end,
 				},
-				follow_url_func = function(url)
+
+				follow_img_func = function(url)
+					vim.notify("url", url)
+					vim.fn.jobstart({ "open", url }) -- Mac OS
+				end,
+	            follow_url_func = function(url)
+					vim.notify("url", url)
 					vim.fn.jobstart({ "open", url }) -- Mac OS
 				end,
 			})
 		end,
 		vim.keymap.set("n", "<leader>obb", "<cmd>ObsidianBacklinks<cr>", { desc = "Backlinks" }),
 		vim.keymap.set("n", "<leader>opp", "<cmd>ObsidianPasteImg<cr>", { desc = "Paste Pic" }),
+		vim.keymap.set("n", "<leader>ond", "<cmd>ObsidianDailies<cr>", { desc = "New Dailies" }),
 		-- vim.keymap.set('n',"<leader>ch","<cmd>ObsidianBacklinks<cr>", {desc = "Backlinks"})
 		-- keys = {
 		--     {"<leader>obb", "<cmd>ObsidianBacklinks<cr>", desc= "Backlinks"},
