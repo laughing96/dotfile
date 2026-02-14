@@ -138,7 +138,7 @@ alias g='git'
 alias gl='git log --oneline --graph --decorate'
 alias gf="git fetch"
 alias gsb="git status -sb"
-alias gls="git rev-list --objects --all | grep "$(git verify-pack -v .git/objects/pack/*.idx | sort -k 3 -n | tail -5 | awk '{print $1}')""
+alias gls="git rev-list --objects --all | grep -E \"\$(git verify-pack -v .git/objects/pack/*.idx | sort -k 3 -n | tail -5 | awk '{print \$1}' | tr '\n' '|' | sed 's/|\$//')\""
 
 # lazysql
 alias sql='lazysql'
