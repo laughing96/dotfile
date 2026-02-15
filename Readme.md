@@ -20,6 +20,7 @@ Thanks to the open-source developers for creating such awesome software, to thos
 [zsh](https://ohmyz.sh/)<br>
 [lazysql](https://github.com/jorgerojas26/lazysql?tab=readme-ov-file#example-connection-urls)
 [tmuxp](https://wiki.archlinux.org/title/Tmuxp)
+[anki](https://apps.ankiweb.net/)
 
 
 
