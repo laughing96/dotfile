@@ -28,7 +28,7 @@ return {
 		},
 
 		opts = {
-			backend = "ueberzug", -- 如果用 WezTerm，这里也可以改为 "ueberzug" 或保持自动检测
+			backend = "kitty", -- 如果用 WezTerm，这里也可以改为 "ueberzug" 或保持自动检测
 			processor = "magick_cli",
 			integrations = {
 				telescope = {
@@ -49,7 +49,7 @@ return {
 				},
 			},
 			max_width = 100, -- 图片最大宽度
-			max_height = 10, -- 图片最大高度
+			max_height = 20, -- 图片最大高度
 			max_width_window_percentage = 50,
 			max_height_window_percentage = 50,
 			window_overlap_clear_enabled = true, -- 浮窗覆盖时是否清除图片
