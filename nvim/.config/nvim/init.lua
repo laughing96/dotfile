@@ -32,3 +32,25 @@ require("lazy").setup({
   },
 })
 
+-- read html in neovim
+vim.api.nvim_create_autocmd("BufReadCmd", {
+  pattern = { "http://*", "https://*" },
+  callback = function(ev)
+    local url = ev.match
+
+    -- 用 curl 下载
+    local cmd = { "curl", "-L", url }
+    local output = vim.fn.system(cmd)
+
+    -- 放进当前 buffer
+    vim.api.nvim_buf_set_lines(ev.buf, 0, -1, false, vim.split(output, "\n"))
+
+    -- 标记这是一个“虚拟文件”
+    vim.bo[ev.buf].buftype = "acwrite"
+    vim.bo[ev.buf].swapfile = false
+    vim.bo[ev.buf].modifiable = true
+
+    -- 防止再走文件系统
+    vim.api.nvim_buf_set_name(ev.buf, url)
+  end,
+})

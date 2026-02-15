@@ -3,3 +3,4 @@ zsh/.zsh/zsh-history-substring-search/
 lazysql/.config/lazysql/history/
 **/Rime/Rime/build
 *.png
+*.log
