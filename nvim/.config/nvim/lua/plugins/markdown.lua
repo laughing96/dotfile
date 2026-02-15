@@ -56,7 +56,7 @@ return {
 			window_overlap_clear_ft_ignore = { "cmp_menu", "cmp_docs", "" },
 			editor_only_render_when_focused = false, -- 失去焦点时是否保留图片
 			tmux_show_only_in_active_window = true, -- Tmux 兼容性
-			hijack_file_patterns = { "*.png", "*.jpg", "*.jpeg", "*.gif", "*.webp", }, -- 直接打开图片文件
+			hijack_file_patterns = { "*.png", "*.jpg", "*.jpeg", "*.gif", "*.webp" }, -- 直接打开图片文件
 			-- rocks = {
 			-- 	hererocks = true, -- 🔥关键
 			-- },
@@ -112,7 +112,8 @@ return {
 					---@return string
 					img_name_func = function()
 						-- Prefix image names with timestamp.
-						return string.format("%s-", os.time())
+						-- return string.format("%s-", os.time())
+                        return os.date("%Y%m%d-%H%M%S-")
 					end,
 
 					-- A function that determines the text to insert in the note when pasting an image.
@@ -123,7 +124,12 @@ return {
 					---@return string
 					img_text_func = function(client, path)
 						path = client:vault_relative_path(path) or path
-						return string.format("![%s](%s)", path.name, path)
+						-- 2. 转成字符串
+						local rel_str = "/" .. tostring(path)
+
+						-- 3. 拼你的 obsidian_path 前缀
+						local full = obsidian_path .. rel_str
+						return string.format("![%s](%s)", path.name, full)
 					end,
 				},
 
@@ -131,7 +137,7 @@ return {
 					vim.notify("url", url)
 					vim.fn.jobstart({ "open", url }) -- Mac OS
 				end,
-	            follow_url_func = function(url)
+				follow_url_func = function(url)
 					vim.notify("url", url)
 					vim.fn.jobstart({ "open", url }) -- Mac OS
 				end,
