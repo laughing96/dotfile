@@ -32,6 +32,14 @@ require("lazy").setup({
   },
 })
 
+-- vim.api.nvim_create_autocmd("FileType", {
+--   pattern = "vue",
+--   callback = function()
+--     vim.opt_local.foldmethod = "indent"
+--     vim.opt_local.foldexpr = ""
+--     vim.opt_local.foldlevel = 99
+--   end,
+-- })
 -- read html in neovim
 vim.api.nvim_create_autocmd("BufReadCmd", {
   pattern = { "http://*", "https://*" },
@@ -54,3 +62,4 @@ vim.api.nvim_create_autocmd("BufReadCmd", {
     vim.api.nvim_buf_set_name(ev.buf, url)
   end,
 })
+
