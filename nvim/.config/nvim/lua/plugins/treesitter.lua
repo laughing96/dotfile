@@ -47,23 +47,25 @@ return {
 			end,
 		},
 	},
-
-	-- Treesitter Configuration
 	{
 		"nvim-treesitter/nvim-treesitter",
-		event = { "BufReadPre", "BufNewFile" },
+		event = { "BufReadPost", "BufNewFile" },
 		build = ":TSUpdate",
-		-- 修改 nvim-treesitter 的 config 部分
-		config = {
-			ensure_installed = { "javascript", "typescript", "python", "html", "vue", "lua" },
-			highlight = {
-				enable = true,
-				additional_vim_regex_highlighting = false,
-			},
-			-- 建议开启，让 tab 缩进更智能
-			indent = {
-				enable = true,
-			},
-		},
+		config = function()
+			require("nvim-treesitter").install({ "rust", "javascript", "python", "typescript", "html", "vue" })
+			vim.api.nvim_create_autocmd({ "FileType", "BufReadPost" }, {
+				group = vim.api.nvim_create_augroup("TreesitterAutoStart", { clear = true }),
+				callback = function()
+					local buf = vim.api.nvim_get_current_buf()
+					-- 检查当前缓冲区是否已经有 Treesitter 解析器
+					local ok, _ = pcall(vim.treesitter.get_parser, buf)
+					if ok then
+						vim.treesitter.start()
+					end
+				end,
+			})
+		end,
 	},
+
+	-- Treesitter Configuration
 }
