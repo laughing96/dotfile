@@ -9,14 +9,11 @@ return {
 	{
 		"williamboman/mason-lspconfig.nvim",
 		lazy = false,
+		dependencies = { { "mason-org/mason.nvim", opts = {} }, "neovim/nvim-lspconfig" },
 		opts = {
 			auto_install = true,
-            ensure_installed = { "lua_ls", "rust_analyzer" },
+			ensure_installed = { "lua_ls", "clangd", "pyright", "vue_ls", "ts_ls" },
 		},
-	},
-	{
-		"hrsh7th/cmp-nvim-lsp",
-		lazy = false,
 	},
 	-- {
 	-- 	"simrat39/rust-tools.nvim",
@@ -54,6 +51,18 @@ return {
 				filetypes = { "toml" },
 			}
 			vim.lsp.enable("taplo")
+			-- Only format TOML with taplo
+			vim.api.nvim_create_autocmd("BufWritePre", {
+				pattern = "*.toml",
+				callback = function()
+					vim.lsp.buf.format({
+						filter = function(client)
+							return client.name == "taplo"
+						end,
+						async = false,
+					})
+				end,
+			})
 
 			-- Harper (disable formatting so it doesn't fight taplo)
 			-- English
@@ -64,10 +73,10 @@ return {
 			}
 			vim.lsp.enable("harper_ls")
 
-            -- vue
+			-- vue
 			local vue_language_server_path = vim.fn.stdpath("data")
 				.. "/mason/packages/vue-language-server/node_modules/@vue/language-server"
-	
+
 			local tsserver_filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" }
 			local vue_plugin = {
 				name = "@vue/typescript-plugin",
@@ -144,10 +153,9 @@ return {
 			vim.lsp.config("ts_ls", ts_ls_config)
 			vim.lsp.enable({ "ts_ls", "vue_ls" }) -- If using `ts_ls` replace `vtsls` to `ts_ls`
 
-
-            -- python
-            vim.lsp.config("pyright",{})
-            vim.lsp.enable("pyright")
+			-- python
+			vim.lsp.config("pyright", {})
+			vim.lsp.enable("pyright")
 
 			vim.lsp.config("clangd", {
 				cmd = { "clangd", "--background-index" },
@@ -156,23 +164,44 @@ return {
 			})
 			vim.lsp.enable("clangd")
 
-			vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
+			vim.keymap.set("n", "K", vim.lsp.buf.hover, {desc="hover"})
 			vim.keymap.set("n", "<leader>gd", vim.lsp.buf.definition, { desc = "definition" })
 			vim.keymap.set("n", "<leader>gr", vim.lsp.buf.references, { desc = "references" })
 			vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "code action" })
+		end,
+	},
+	{
+		"nvimtools/none-ls.nvim",
+		dependencies = {
+			"nvimtools/none-ls-extras.nvim",
+		},
+		config = function()
+			local null_ls = require("null-ls")
+			null_ls.setup({
+				sources = {
+					null_ls.builtins.formatting.stylua, --Lua 代码格式化工具，用于格式化 .lua 文件。
+					null_ls.builtins.formatting.isort, --Python 导入排序工具（整理 import 顺序）。
+					null_ls.builtins.formatting.black, --Python 代码格式化工具 会改代码
+					null_ls.builtins.formatting.clang_format, --C/C++/Objective-C 代码格式化
+					null_ls.builtins.formatting.prettier, --JS/TS/HTML/CSS 等前端代码格式化。
 
-			-- Only format TOML with taplo
-			vim.api.nvim_create_autocmd("BufWritePre", {
-				pattern = "*.toml",
-				callback = function()
-					vim.lsp.buf.format({
-						filter = function(client)
-							return client.name == "taplo"
-						end,
-						async = false,
-					})
-				end,
+					-- null_ls.builtins.diagnostics.eslint_d, --（快速版本 eslint_d） → JavaScript/TypeScript 语法和风格检查（诊断）
+					null_ls.builtins.code_actions.gitsigns, --通过 Git 状态提供 stage hunk, reset hunk 等动作，作为 LSP code actions
+
+					require("none-ls.diagnostics.flake8"), --不修改代码，只报告问题
+				},
 			})
+
+			vim.keymap.set("n", "<leader>gf", vim.lsp.buf.format, {desc="format code"})
+			vim.keymap.set(
+				"n",
+				"<leader>do",
+				vim.diagnostic.open_float,
+				{ desc = "open diagnostic float", noremap = true, silent = true }
+			)
+			-- vim.keymap.set("n", "<leader>d[", vim.diagnostic.goto_prev, { noremap = true, silent = true })
+			-- vim.keymap.set("n", "<leader>d]", vim.diagnostic.goto_next, { noremap = true, silent = true })
+			-- vim.keymap.set("n", "<leader>dd", vim.diagnostic.setloclist, { noremap = true, silent = true })
 		end,
 	},
 }
