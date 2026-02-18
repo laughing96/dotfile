@@ -102,6 +102,10 @@ return {
 			dapui.float_element("repl")
 			dapui.float_element("repl")
 		end, { desc = "repl（调试交互）" })
+		vim.keymap.set("n", "<leader>dpo", function()
+			dapui.float_element("scopes")
+			dapui.float_element("scopes")
+		end, { desc = "availabe scopes and variables" })
 
 		vim.keymap.set("n", "<leader>dpb", function()
 			dapui.float_element("brekpoints")
