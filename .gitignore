@@ -4,3 +4,5 @@ lazysql/.config/lazysql/history/
 **/Rime/Rime/build
 *.png
 *.log
+*.pdf
+**/result/
