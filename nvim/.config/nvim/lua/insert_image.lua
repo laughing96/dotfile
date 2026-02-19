@@ -14,7 +14,7 @@ local function smart_image_insert()
     
     if is_image then
         -- 如果是 ![] 则只搜寻图片格式
-        find_command = { "fd", "--type", "f", "-e", "png", "-e", "jpg", "-e", "jpeg", "-e", "gif", "-e", "webp", "-e" ,"heif", }
+        find_command = { "fd", "--type", "f", "-e", "png", "-e", "jpg", "-e", "jpeg", "-e", "gif", "-e", "webp", "-e" ,"heic", }
     end
 
     builtin.find_files({
@@ -27,7 +27,7 @@ local function smart_image_insert()
                 
                 -- 构造插入文本：如果前面没写括号则补齐，如果写了则只填路径
                 local path = selection.value
-                local insert_text = "(" .. path .. ")"
+                local insert_text = "(~/obsidian/mynote/"  .. path .. ")"
                 
                 -- 如果光标前已经有 '('，我们就不重复补括号
                 if before_cursor:sub(-1) == "(" then
