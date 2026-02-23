@@ -1,4 +1,13 @@
 return {
+    -- time code
+    { 'wakatime/vim-wakatime', lazy = false },
+    -- register paste
+    {
+        "leonie-theobald/regput",
+        config = function()
+            require("regput").setup({})
+        end,
+    },
     {
         "folke/which-key.nvim",
         event = "VeryLazy",
