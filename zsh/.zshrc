@@ -106,7 +106,7 @@ alias tm='tmux'
 rss_yaml="/Users/dl/Code/k8s/hackernews-reader/rss.yaml"
 alias rsst="tmuxp load $rss_yaml" 
 linux_yaml="/Users/dl/obsidian/mynote/linux.yaml"
-alias linuxt="tmuxp load $linux_yaml" 
+alias ldd3="tmuxp load $linux_yaml" 
 # ls 系列（现代化）
 alias ls='eza --icons --group-directories-first'
 alias ll='eza -lh --icons --group-directories-first'
