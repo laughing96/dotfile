@@ -63,7 +63,9 @@ return {
 		},
 	},
 	{
-		"epwalsh/obsidian.nvim",
+		-- "epwalsh/obsidian.nvim",
+		"obsidian-nvim/obsidian.nvim",
+		version = "*",
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 			"hrsh7th/nvim-cmp",
@@ -74,6 +76,8 @@ return {
 			local home = os.getenv("HOME")
 			local obsidian_path = home .. "/obsidian/mynote"
 			require("obsidian").setup({
+
+				legacy_commands = false,
 				workspaces = {
 					{
 						name = "mynote",
@@ -106,14 +110,15 @@ return {
 					-- The default folder to place images in via `:ObsidianPasteImg`.
 					-- If this is a relative path it will be interpreted as relative to the vault root.
 					-- You can always override this per image by passing a full path to the command instead of just a filename.
-					img_folder = "Attachment", -- This is the default
+					-- img_folder = "Attachment", -- This is the default
+					folder = "Attachment", -- This is the default
 
 					-- Optional, customize the default name or prefix when pasting images via `:ObsidianPasteImg`.
 					---@return string
 					img_name_func = function()
 						-- Prefix image names with timestamp.
 						-- return string.format("%s-", os.time())
-                        return os.date("%Y%m%d-%H%M%S-")
+						return os.date("%Y%m%d-%H%M%S-")
 					end,
 
 					-- A function that determines the text to insert in the note when pasting an image.
@@ -133,20 +138,38 @@ return {
 					end,
 				},
 
-				follow_img_func = function(url)
-					vim.notify("url", url)
-					vim.fn.jobstart({ "open", url }) -- Mac OS
-				end,
-				follow_url_func = function(url)
-					vim.notify("url", url)
-					vim.fn.jobstart({ "open", url }) -- Mac OS
-				end,
+				-- follow_img_func = function(url)
+				-- 	vim.notify("url", url)
+				-- 	vim.fn.jobstart({ "open", url }) -- Mac OS
+				-- end,
+				-- follow_url_func = function(url)
+				-- 	vim.notify("url", url)
+				-- 	vim.fn.jobstart({ "open", url }) -- Mac OS
+				-- end,
+				-- vim.ui.open = (function(overridden)
+				--   return function(uri, opt)
+				--     if vim.endswith(uri, ".png") then
+				--       vim.cmd("edit " .. uri) -- early return to just open in neovim
+				--       return
+				--     elseif vim.endswith(uri, ".pdf") then
+				--       opt = { cmd = { "zathura" } } -- override open app
+				--     end
+				--     return overridden(uri, opt)
+				--   end
+				-- end)(vim.ui.open)
 			})
 		end,
-		vim.keymap.set("n", "<leader>obb", "<cmd>ObsidianBacklinks<cr>", { desc = "Backlinks" }),
-		vim.keymap.set("n", "<leader>opp", "<cmd>ObsidianPasteImg<cr>", { desc = "Paste Pic" }),
-		vim.keymap.set("n", "<leader>ond", "<cmd>ObsidianDailies<cr>", { desc = "New Dailies" }),
-		-- vim.keymap.set('n',"<leader>ch","<cmd>ObsidianBacklinks<cr>", {desc = "Backlinks"})
+
+		vim.keymap.set("n", "<leader>obo", "<cmd>Obsidian open<cr>", { desc = "open by obsidian" }),
+		vim.keymap.set("n", "<leader>obg", "<cmd>Obsidian tags<cr>", { desc = "list tags" }),
+
+		vim.keymap.set("n", "<leader>obb", "<cmd>Obsidian backlinks<cr>", { desc = "Backlinks" }),
+		vim.keymap.set("n", "<leader>obp", "<cmd>Obsidian paste_img<cr>", { desc = "Paste Pic" }),
+		vim.keymap.set("n", "<leader>obd", "<cmd>Obsidian dailies<cr>", { desc = "New Dailies" }),
+		vim.keymap.set("n", "<leader>obl", "<cmd>Obsidian toc<cr>", { desc = "list current table" }),
+		vim.keymap.set("n", "<leader>obt", "<cmd>Obsidian template<cr>", { desc = "template" }),
+
+		vim.keymap.set("v", "<leader>obe", "<cmd>Obsidian extract_note<cr>", { desc = "extract and insert " }),
 		-- keys = {
 		--     {"<leader>obb", "<cmd>ObsidianBacklinks<cr>", desc= "Backlinks"},
 		-- },
