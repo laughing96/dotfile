@@ -102,11 +102,14 @@ export PKG_CONFIG_PATH="/opt/homebrew/opt/readline/lib/pkgconfig:/opt/homebrew/o
 # tmux
 alias ta='tmux new-session -A -s main'
 alias tm='tmux'
+alias tks="tmux kill-session -t $TMUX_PANE"
 
 rss_yaml="/Users/dl/Code/k8s/hackernews-reader/rss.yaml"
 alias rsst="tmuxp load $rss_yaml" 
 linux_yaml="/Users/dl/obsidian/mynote/linux.yaml"
 alias ldd3="tmuxp load $linux_yaml" 
+note_yaml="/Users/dl/obsidian/mynote/note.yaml"
+alias note="tmuxp load $note_yaml"
 # ls 系列（现代化）
 alias ls='eza --icons --group-directories-first'
 alias ll='eza -lh --icons --group-directories-first'

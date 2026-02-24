@@ -124,7 +124,8 @@ local function uptime_info()
     -- 关闭pipe,
     handle:close()
     result = result:gsub("\n","")
-    local uptime_duration = result:match("up%s+([%d:]+)")
+    -- local uptime_duration = result:match("up%s+([%d:]+)")
+    local uptime_duration = result:match("up%s+([^,]+)")
     -- gsub(pattern, replacement) Lua的字符串替换函数
     return uptime_duration
 end
