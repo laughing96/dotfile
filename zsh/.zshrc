@@ -103,6 +103,7 @@ export PKG_CONFIG_PATH="/opt/homebrew/opt/readline/lib/pkgconfig:/opt/homebrew/o
 alias ta='tmux new-session -A -s main'
 alias tm='tmux'
 alias tks="tmux kill-session -t $TMUX_PANE"
+alias tls="tmux ls"
 
 rss_yaml="/Users/dl/Code/k8s/hackernews-reader/rss.yaml"
 alias rsst="tmuxp load $rss_yaml" 
