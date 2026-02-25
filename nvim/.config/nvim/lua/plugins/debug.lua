@@ -11,14 +11,6 @@ return {
 
 		require("dapui").setup({
 			layouts = {
-				-- {
-				--     -- 左侧：只放 scopes（变量）
-				--     elements = {
-				--         { id = "scopes", size = 1.0 },
-				--     },
-				--     size = 40,
-				--     position = "left",
-				-- },
 				{
 					-- 底部：只放 repl（调试交互）
 					elements = {
@@ -28,16 +20,7 @@ return {
 					size = 20,
 					position = "bottom",
 				},
-				-- {
-				--     -- 底部：只放 repl（调试交互）
-				--     elements = {
-				--         { id = "console", size = 1.0 },
-				--     },
-				--     size = 20,
-				--     position = "bottom",
-				-- },
 			},
-
 			floating = {
 				border = "rounded",
 			},
@@ -74,13 +57,19 @@ return {
 		end, { silent = true })
 		vim.keymap.set("n", "<leader>db", dap.toggle_breakpoint, {desc='toggle breakpoint'})
 		vim.keymap.set("n", "<leader>dc", dap.continue, {desc='continue'})
-		vim.keymap.set("n", "<leader>ds", dap.step_into, {desc='step into'})
+		vim.keymap.set("n", "<leader>ds", dap.step_over, {desc='step over'})
+		vim.keymap.set("n", "<leader>di", dap.step_into, {desc='step into'})
+		vim.keymap.set("n", "<leader>do", dap.step_out, {desc='step out'})
+		vim.keymap.set("n", "<leader>dr", dap.repl.open, {desc='repl open'})
 		vim.keymap.set("n", "<leader>dd", function()
 			dap.terminate()
 			dapui.close()
 			-- dap.clear_breakpoints()
 		end, { desc = "dap terminate " })
 
+        --------
+        --- dap ui
+        --------
 		vim.keymap.set("n", "<leader>dpu", function()
 			dapui.toggle()
 		end, { desc = "DAP UI Toggle" })

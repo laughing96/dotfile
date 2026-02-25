@@ -3,7 +3,9 @@ return {
 		"williamboman/mason.nvim",
 		lazy = false,
 		config = function()
-			require("mason").setup()
+			require("mason").setup({
+                ensure_installed = {"java-debug-adapter","java-test"}
+            })
 		end,
 	},
 	{
@@ -12,7 +14,7 @@ return {
 		dependencies = { { "mason-org/mason.nvim", opts = {} }, "neovim/nvim-lspconfig" },
 		opts = {
 			auto_install = true,
-			ensure_installed = { "lua_ls", "clangd", "pyright", "vue_ls", "ts_ls" },
+			ensure_installed = { "lua_ls", "clangd", "pyright", "vue_ls", "ts_ls", "jdtls" },
 		},
 	},
 	-- {
@@ -184,6 +186,7 @@ return {
 					null_ls.builtins.formatting.black, --Python 代码格式化工具 会改代码
 					null_ls.builtins.formatting.clang_format, --C/C++/Objective-C 代码格式化
 					null_ls.builtins.formatting.prettier, --JS/TS/HTML/CSS 等前端代码格式化。
+					null_ls.builtins.formatting.google_java_format, --Java 代码格式化
 
 					-- null_ls.builtins.diagnostics.eslint_d, --（快速版本 eslint_d） → JavaScript/TypeScript 语法和风格检查（诊断）
 					null_ls.builtins.code_actions.gitsigns, --通过 Git 状态提供 stage hunk, reset hunk 等动作，作为 LSP code actions
@@ -195,7 +198,7 @@ return {
 			vim.keymap.set("n", "<leader>gf", vim.lsp.buf.format, {desc="format code"})
 			vim.keymap.set(
 				"n",
-				"<leader>do",
+				"<leader>go",
 				vim.diagnostic.open_float,
 				{ desc = "open diagnostic float", noremap = true, silent = true }
 			)

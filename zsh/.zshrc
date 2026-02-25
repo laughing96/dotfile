@@ -301,3 +301,4 @@ le() {
 source  ~/.zsh/auto_complete.sh
 source ~/.zsh/ai_env.sh
 eval "$(starship init zsh)"
+export PATH="/opt/homebrew/opt/openjdk@21/bin:$PATH"
