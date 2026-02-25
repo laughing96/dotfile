@@ -4,8 +4,8 @@ return {
 		lazy = false,
 		config = function()
 			require("mason").setup({
-                ensure_installed = {"java-debug-adapter","java-test"}
-            })
+				ensure_installed = { "java-debug-adapter", "java-test" },
+			})
 		end,
 	},
 	{
@@ -156,9 +156,13 @@ return {
 			vim.lsp.enable({ "ts_ls", "vue_ls" }) -- If using `ts_ls` replace `vtsls` to `ts_ls`
 
 			-- python
-			vim.lsp.config("pyright", {})
-			vim.lsp.enable("pyright")
+			local util = require("lspconfig.util")
 
+			vim.lsp.config("pyright", {
+				root_dir = util.root_pattern("pyproject.toml", "setup.py", "setup.cfg", "requirements.txt", ".git"),
+			})
+
+			vim.lsp.enable("pyright")
 			vim.lsp.config("clangd", {
 				cmd = { "clangd", "--background-index" },
 				filetypes = { "c", "cpp", "objc", "objcpp" },
@@ -166,7 +170,7 @@ return {
 			})
 			vim.lsp.enable("clangd")
 
-			vim.keymap.set("n", "K", vim.lsp.buf.hover, {desc="hover"})
+			vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "hover" })
 			vim.keymap.set("n", "<leader>gd", vim.lsp.buf.definition, { desc = "definition" })
 			vim.keymap.set("n", "<leader>gr", vim.lsp.buf.references, { desc = "references" })
 			vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "code action" })
@@ -195,7 +199,7 @@ return {
 				},
 			})
 
-			vim.keymap.set("n", "<leader>gf", vim.lsp.buf.format, {desc="format code"})
+			vim.keymap.set("n", "<leader>gf", vim.lsp.buf.format, { desc = "format code" })
 			vim.keymap.set(
 				"n",
 				"<leader>go",
