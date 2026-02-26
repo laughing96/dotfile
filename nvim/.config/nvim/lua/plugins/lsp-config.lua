@@ -159,7 +159,7 @@ return {
 			local util = require("lspconfig.util")
 
 			vim.lsp.config("pyright", {
-				root_dir = util.root_pattern("pyproject.toml", "setup.py", "setup.cfg", "requirements.txt", ".git"),
+				root_dir = util.root_pattern("pyproject.toml", "setup.py", "setup.cfg", "requirements.txt", ".git")(vim.fn.getcwd()),
 			})
 
 			vim.lsp.enable("pyright")
