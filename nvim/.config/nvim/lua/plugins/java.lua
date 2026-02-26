@@ -2,21 +2,21 @@ return {
     ----
     ---maven
     -----
-    -- {
-    --     "eatgrass/maven.nvim",
-    --     cmd = { "Maven", "MavenExec" },
-    --     dependencies = "nvim-lua/plenary.nvim",
-    --     config = function()
-    --         require("maven").setup({
-    --             executable = "mvn", -- `mvn` should be in your `PATH`, or the path to the maven exectable, for example `./mvnw`
-    --             cwd = nil, -- work directory, default to `vim.fn.getcwd()`
-    --             settings = nil, -- specify the settings file or use the default settings
-    --             commands = { -- add custom goals to the command list
-    --                 { cmd = { "clean", "compile" }, desc = "clean then compile" },
-    --             },
-    --         })
-    --     end,
-    -- },
+    {
+        "eatgrass/maven.nvim",
+        cmd = { "Maven", "MavenExec" },
+        dependencies = "nvim-lua/plenary.nvim",
+        config = function()
+            require("maven").setup({
+                executable = "mvn", -- `mvn` should be in your `PATH`, or the path to the maven exectable, for example `./mvnw`
+                cwd = nil, -- work directory, default to `vim.fn.getcwd()`
+                settings = nil, -- specify the settings file or use the default settings
+                commands = { -- add custom goals to the command list
+                    { cmd = { "clean", "compile" }, desc = "clean then compile" },
+                },
+            })
+        end,
+    },
     --------------------------------------------------
     -- JAVA
     --------------------------------------------------
@@ -74,6 +74,7 @@ return {
             -- WORKSPACE
             --------------------------------------------------
             local project = vim.fn.fnamemodify(root_dir, ":p:h:t")
+            vim.notify(project)
 
             local workspace = vim.fn.stdpath("data") .. "/jdtls-workspace/" .. project
 
@@ -134,6 +135,9 @@ return {
 
                         configuration = {
                             updateBuildConfiguration = "interactive",
+                            -- maven = {
+                            --     userSettings = vim.fn.expand("~/.m2/settings.xml"),
+                            -- },
                         },
 
                         references = {
