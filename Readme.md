@@ -21,4 +21,4 @@ Thanks to the open-source developers for creating such awesome software, to thos
 [anki](https://apps.ankiweb.net/)
 
 
-
+[neo451](https://github.com/neo451)
