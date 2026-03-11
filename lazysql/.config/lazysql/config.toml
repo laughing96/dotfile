@@ -4,6 +4,15 @@ Provider = 'sqlite3'
 URL = 'file:/Users/dl/Code/backend/db.sqlite3?loc=auto'
 
 [[database]]
+Name = 'docker_test_postgres'
+Provider = 'postgres'
+DBName = 'postgres'
+URL = 'postgresql://postgres:mysecretpassword@127.0.0.1:5432/postgres?sslmode=disable'
+Commands = [
+    { Command = 'kubectl -n hackernews port-forward service/postgres 5432:5432 ', WaitForPort = '5432' },
+]
+
+[[database]]
 Name = 'Rss-reader'
 Provider = 'postgres'
 DBName = 'hackernews'
