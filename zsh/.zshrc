@@ -151,7 +151,8 @@ alias gls="git rev-list --objects --all | grep -E \"\$(git verify-pack -v .git/o
 alias sql='lazysql'
 
 # 进程
-alias ps='ps aux'
+# alias ps='ps aux'
+alias ps='ps'
 alias top='htop'
 
 # functions
