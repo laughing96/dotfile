@@ -1,6 +1,7 @@
 return {
     {
         "laughing96/vim-translator",
+        lazy=true,
         config = function()
             -- 翻译插件快捷键
             vim.keymap.set("n", "<leader>tw", "<cmd>TranslateW<CR>", { desc = "Translate to window" })

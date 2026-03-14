@@ -14,7 +14,7 @@ return {
 		dependencies = { { "mason-org/mason.nvim", opts = {} }, "neovim/nvim-lspconfig" },
 		opts = {
 			auto_install = true,
-			ensure_installed = { "lua_ls", "clangd", "pyright", "vue_ls", "ts_ls", "jdtls" },
+			ensure_installed = { "lua_ls", "clangd", "ty", "ruff", "vue_ls", "ts_ls", "jdtls" },
 		},
 	},
 	-- {
@@ -158,11 +158,28 @@ return {
 			-- python
 			local util = require("lspconfig.util")
 
-			vim.lsp.config("pyright", {
-				root_dir = util.root_pattern("pyproject.toml", "setup.py", "setup.cfg", "requirements.txt", ".git")(vim.fn.getcwd()),
+			-- vim.lsp.config("pyright", {
+			-- 	root_dir = util.root_pattern("pyproject.toml", "setup.py", "setup.cfg", "requirements.txt", ".git")(
+			-- 		vim.fn.getcwd()
+			-- 	),
+			-- 	settings = {
+			-- 		python = {
+			-- 			analysis = {
+			-- 				-- 核心配置：开启自动导入提示
+			-- 				autoImportCompletions = true,
+			-- 				typeCheckingMode = "basic", -- 或者 "standard"
+			-- 				indexing = true,
+			-- 			},
+			-- 		},
+			-- 	},
+			-- })
+			--
+			-- vim.lsp.enable("pyright")
+			vim.lsp.enable({
+				"ruff",
+				"ty",
+				--"basedpyright"
 			})
-
-			vim.lsp.enable("pyright")
 			vim.lsp.config("clangd", {
 				cmd = { "clangd", "--background-index" },
 				filetypes = { "c", "cpp", "objc", "objcpp" },
@@ -189,17 +206,20 @@ return {
 					null_ls.builtins.formatting.isort, --Python 导入排序工具（整理 import 顺序）。
 					null_ls.builtins.formatting.black, --Python 代码格式化工具 会改代码
 					null_ls.builtins.formatting.clang_format, --C/C++/Objective-C 代码格式化
+					-- null_ls.builtins.code_actions.ruff, --Python 修复import
 					null_ls.builtins.formatting.prettier, --JS/TS/HTML/CSS 等前端代码格式化。
 					null_ls.builtins.formatting.google_java_format, --Java 代码格式化
 
 					-- null_ls.builtins.diagnostics.eslint_d, --（快速版本 eslint_d） → JavaScript/TypeScript 语法和风格检查（诊断）
 					null_ls.builtins.code_actions.gitsigns, --通过 Git 状态提供 stage hunk, reset hunk 等动作，作为 LSP code actions
 
-					require("none-ls.diagnostics.flake8"), --不修改代码，只报告问题
+					-- require("none-ls.diagnostics.flake8"), --不修改代码，只报告问题
 				},
 			})
 
 			vim.keymap.set("n", "<leader>gf", vim.lsp.buf.format, { desc = "format code" })
+			vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, { desc = "Rename" })
+			vim.keymap.set("n", "<leader>td", vim.lsp.buf.type_definition, { desc = "type definition" })
 			vim.keymap.set(
 				"n",
 				"<leader>go",

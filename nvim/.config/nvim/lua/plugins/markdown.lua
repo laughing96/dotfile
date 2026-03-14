@@ -64,8 +64,8 @@ return {
     },
     {
         -- "epwalsh/obsidian.nvim",
-        -- "obsidian-nvim/obsidian.nvim",
-        "laughing96/obsidian.vim",
+        "obsidian-nvim/obsidian.nvim",
+        -- "laughing96/obsidian.vim",
         version = "*",
         -- dir = "/Users/dl/code/obsidian.nvim",
         dependencies = {
@@ -146,10 +146,12 @@ return {
                         -- vim.notify("client is ",client:vault_relative_path(path))
                         -- path = client:vault_relative_path(path) or path
                         -- 2. 转成字符串
-                        local rel_str = "/" .. tostring(path)
+                        -- local rel_str = "/" .. tostring(path)
+                        local rel_str = tostring(path)
 
                         -- 3. 拼你的 obsidian_path 前缀
-                        local full = obsidian_path .. rel_str
+                        -- local full = obsidian_path .. rel_str
+                        local full = rel_str
                         local alias = string.sub(path.name, 17)
                         return string.format("![%s](%s)", alias, full)
                     end,
