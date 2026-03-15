@@ -64,8 +64,8 @@ return {
     },
     {
         -- "epwalsh/obsidian.nvim",
-        "obsidian-nvim/obsidian.nvim",
-        -- "laughing96/obsidian.vim",
+        -- "obsidian-nvim/obsidian.nvim",
+        "laughing96/obsidian.nvim",
         version = "*",
         -- dir = "/Users/dl/code/obsidian.nvim",
         dependencies = {
