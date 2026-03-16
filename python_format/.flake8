@@ -1,4 +1,11 @@
 [flake8]
+# 排除不需要检查的目录
+exclude =
+    .git,
+    __pycache__,
+    .venv,
+    venv,
+    build,
+    dist
 max-line-length = 100
 ignore = E203, W503
-exclude = .git,__pycache__,venv
