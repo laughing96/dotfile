@@ -14,7 +14,7 @@ return {
 		dependencies = { { "mason-org/mason.nvim", opts = {} }, "neovim/nvim-lspconfig" },
 		opts = {
 			auto_install = true,
-			ensure_installed = { "lua_ls", "clangd", "ty", "ruff", "vue_ls", "ts_ls", "jdtls" },
+			ensure_installed = { "lua_ls", "clangd", "ty", "ruff", "vue_ls", "ts_ls", "jdtls","taplo","harper_ls" },
 		},
 	},
 	-- {
@@ -46,13 +46,11 @@ return {
 			vim.lsp.config["lua_ls"] = {
 				capabilities = capabilities,
 			}
-			vim.lsp.enable("lua_ls")
 			-- TOML (taplo)
 			vim.lsp.config["taplo"] = {
 				capabilities = capabilities,
 				filetypes = { "toml" },
 			}
-			vim.lsp.enable("taplo")
 			-- Only format TOML with taplo
 			vim.api.nvim_create_autocmd("BufWritePre", {
 				pattern = "*.toml",
@@ -73,7 +71,6 @@ return {
 					client.server_capabilities.documentFormattingProvider = false
 				end,
 			}
-			vim.lsp.enable("harper_ls")
 
 			-- vue
 			local vue_language_server_path = vim.fn.stdpath("data")
@@ -153,7 +150,6 @@ return {
 			vim.lsp.config("vtsls", vtsls_config)
 			vim.lsp.config("vue_ls", vue_ls_config)
 			vim.lsp.config("ts_ls", ts_ls_config)
-			vim.lsp.enable({ "ts_ls", "vue_ls" }) -- If using `ts_ls` replace `vtsls` to `ts_ls`
 
 			-- python
 			local util = require("lspconfig.util")
@@ -175,17 +171,21 @@ return {
 			-- })
 			--
 			-- vim.lsp.enable("pyright")
-			vim.lsp.enable({
-				"ruff",
-				"ty",
-				--"basedpyright"
-			})
 			vim.lsp.config("clangd", {
 				cmd = { "clangd", "--background-index" },
 				filetypes = { "c", "cpp", "objc", "objcpp" },
 				-- root_dir = require('lspconfig.util').root_pattern("compile_commands.json", ".git")
 			})
 			vim.lsp.enable("clangd")
+			vim.lsp.enable({
+				"ruff",
+				"ty",
+				--"basedpyright"
+			})
+			vim.lsp.enable("lua_ls")
+			vim.lsp.enable("harper_ls")
+			vim.lsp.enable({ "ts_ls", "vue_ls" }) -- If using `ts_ls` replace `vtsls` to `ts_ls`
+            vim.lsp.enable("taplo")
 
 			vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "hover" })
 			vim.keymap.set("n", "<leader>gd", vim.lsp.buf.definition, { desc = "definition" })
