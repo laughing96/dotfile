@@ -203,7 +203,7 @@ return {
 			null_ls.setup({
 				sources = {
 					null_ls.builtins.formatting.stylua, --Lua 代码格式化工具，用于格式化 .lua 文件。
-					null_ls.builtins.formatting.isort, --Python 导入排序工具（整理 import 顺序）。
+					-- null_ls.builtins.formatting.isort, --Python 导入排序工具（整理 import 顺序）。
 					null_ls.builtins.formatting.black, --Python 代码格式化工具 会改代码
 					null_ls.builtins.formatting.clang_format, --C/C++/Objective-C 代码格式化
 					-- null_ls.builtins.code_actions.ruff, --Python 修复import
