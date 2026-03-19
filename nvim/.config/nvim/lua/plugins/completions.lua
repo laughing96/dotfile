@@ -11,19 +11,33 @@ return {
 		},
 	},
 	{
-		"monkoose/neocodeium",
-		event = false,
+		"supermaven-inc/supermaven-nvim",
+		event = "InsertEnter",
+
 		config = function()
-			local neocodeium = require("neocodeium")
-			neocodeium.setup({
-				manual = true,
+			require("supermaven-nvim").setup({
+				keymaps = {
+					accept_suggestion = "<Tab>", -- 用 Tab 接受 AI 补全
+					clear_suggestion = "<C-]>",
+					accept_word = "<C-j>",
+				},
 			})
-			vim.keymap.set("i", "<A-e>", function()
-				neocodeium.cycle_or_complete()
-			end)
-			vim.keymap.set("i", "<A-f>", neocodeium.accept)
 		end,
 	},
+	-- {
+	-- 	"monkoose/neocodeium",
+	-- 	event = false,
+	-- 	config = function()
+	-- 		local neocodeium = require("neocodeium")
+	-- 		neocodeium.setup({
+	-- 			manual = true,
+	-- 		})
+	-- 		vim.keymap.set("i", "<A-e>", function()
+	-- 			neocodeium.cycle_or_complete()
+	-- 		end)
+	-- 		vim.keymap.set("i", "<A-f>", neocodeium.accept)
+	-- 	end,
+	-- },
 	{
 		"saghen/blink.cmp",
 		dependencies = { "rafamadriz/friendly-snippets" },
@@ -45,13 +59,30 @@ return {
 			-- C-k: Toggle signature help (if signature.enabled = true)
 			--
 			-- See :h blink-cmp-config-keymap for defining your own keymap
-			keymap = { preset = "super-tab" },
+			keymap = {
+				preset = "super-tab",
+				["<Tab>"] = {
+					"select_next",
+					"snippet_forward",
+					"fallback",
+				},
+
+				["<S-Tab>"] = {
+					"select_prev",
+					"snippet_backward",
+					"fallback",
+				},
+
+				["<CR>"] = { "accept", "fallback" },
+
+				["<C-Space>"] = { "show", "fallback" },
+			},
 
 			appearance = {
 				nerd_font_variant = "mono",
 			},
 
-			completion = { documentation = { auto_show = true} },
+			completion = { documentation = { auto_show = true } },
 
 			-- Default list of enabled providers defined so that you can extend it
 			-- elsewhere in your config, without redefining it, due to `opts_extend`
