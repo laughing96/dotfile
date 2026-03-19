@@ -1,45 +1,170 @@
 return {
-  {
-    "hrsh7th/cmp-nvim-lsp",
-    lazy= false,
-  },
-  {
-    "L3MON4D3/LuaSnip",
-    dependencies = {
-      "saadparwaiz1/cmp_luasnip",
-      "rafamadriz/friendly-snippets",
-    },
-  },
-  {
-    "hrsh7th/nvim-cmp",
-    config = function()
-      local cmp = require("cmp")
-      require("luasnip.loaders.from_vscode").lazy_load()
+	{
+		"hrsh7th/cmp-nvim-lsp",
+		lazy = false,
+	},
+	{
+		"L3MON4D3/LuaSnip",
+		dependencies = {
+			"saadparwaiz1/cmp_luasnip",
+			"rafamadriz/friendly-snippets",
+		},
+	},
+	{
+		"monkoose/neocodeium",
+		event = false,
+		config = function()
+			local neocodeium = require("neocodeium")
+			neocodeium.setup({
+                manual = true,
+            })
+			vim.keymap.set("i", "<A-e>", function()
+				neocodeium.cycle_or_complete()
+			end)
+			vim.keymap.set("i", "<A-f>", neocodeium.accept)
+		end,
+	},
+	{
+		"hrsh7th/nvim-cmp",
+		dependencies = {
+			"neovim/nvim-lspconfig",
+			"hrsh7th/cmp-nvim-lsp",
+			"hrsh7th/cmp-buffer",
+			"hrsh7th/cmp-path",
+			"hrsh7th/cmp-cmdline",
+			"onsails/lspkind.nvim",
+			"monkoose/neocodeium",
+		},
+		config = function()
+			local cmp = require("cmp")
+			local ls = require("luasnip")
+			local neocodeium = require("neocodeium")
+			local commands = require("neocodeium.commands")
+			require("luasnip.loaders.from_vscode").lazy_load()
+			-- python
+			ls.add_snippets("python", {
+				ls.snippet("sec", {
+					ls.text_node("# " .. string.rep("-", 8) .. " "),
+					ls.insert_node(1, "HEADER"),
+					ls.text_node(" " .. string.rep("-", 40)),
+				}),
+			})
+			cmp.event:on("menu_opened", function()
+				neocodeium.clear()
+			end)
 
-      cmp.setup({
-        snippet = {
-          expand = function(args)
-            require("luasnip").lsp_expand(args.body)
-          end,
-        },
-        window = {
-          completion = cmp.config.window.bordered(),
-          documentation = cmp.config.window.bordered(),
-        },
-        mapping = cmp.mapping.preset.insert({
-          ["<C-b>"] = cmp.mapping.scroll_docs(-4),
-          ["<C-f>"] = cmp.mapping.scroll_docs(4),
-          ["<C-Space>"] = cmp.mapping.complete(),
-          ["<C-e>"] = cmp.mapping.abort(),
-          ["<CR>"] = cmp.mapping.confirm({ select = true }),
-        }),
-        sources = cmp.config.sources({
-          { name = "nvim_lsp" },
-          { name = "luasnip" }, -- For luasnip users.
-        }, {
-          { name = "buffer" },
-        }),
-      })
-    end,
-  },
+			neocodeium.setup({
+				filter = function()
+					return not cmp.visible()
+				end,
+			})
+
+			-- create an autocommand which closes cmp when ai completions are displayed
+			vim.api.nvim_create_autocmd("User", {
+				pattern = "NeoCodeiumCompletionDisplayed",
+				callback = function()
+					require("cmp").abort()
+				end,
+			})
+
+			-- set up some sort of keymap to cycle and complete to trigger completion
+			cmp.setup({
+				performance = {
+					max_view_entries = 8, -- ⭐ 最多显示8条
+				},
+				completion = {
+					keyword_length = 2, -- 至少2个字符才触发
+					-- autocomplete = false,
+				},
+				snippet = {
+					expand = function(args)
+						ls.lsp_expand(args.body)
+					end,
+				},
+				window = {
+					completion = cmp.config.window.bordered(),
+					documentation = cmp.config.window.bordered(),
+				},
+				formatting = {
+					-- fields 决定了补全菜单中内容的排列顺序
+					fields = { "kind", "abbr", "menu" },
+					format = require("lspkind").cmp_format({
+						mode = "symbol_text", -- 强烈建议用 symbol_text，左边图标右边文字，很有 IDEA 感
+						maxwidth = 50,
+						ellipsis_char = "...",
+						symbol_map = {
+							Codeium = "",
+							Snippet = "", -- 为代码片段增加识别度
+						},
+						before = function(entry, vim_item)
+							-- 在这里可以为不同的 Source 加上来源标签
+							local menu_map = {
+								nvim_lsp = "[LSP]",
+								luasnip = "[Snip]",
+								codeium = "[AI]",
+								buffer = "[Buf]",
+								path = "[Path]",
+							}
+
+							vim_item.menu = menu_map[entry.source.name]
+
+							-- ⭐ AI 高亮一点（关键）
+							if entry.source.name == "codeium" then
+								vim_item.kind = " AI"
+							end
+
+							return vim_item
+						end,
+					}),
+				},
+				mapping = cmp.mapping.preset.insert({
+					["<C-e>"] = cmp.mapping.abort(),
+					-- 手动触发补全
+					["<C-Space>"] = cmp.mapping.complete(),
+					["<CR>"] = cmp.mapping.confirm({ select = true }),
+					["<Tab>"] = cmp.mapping(function(fallback)
+						-- 1️⃣ Codeium 有建议 → 优先接受
+						-- local vt = require("codeium.virtual_text")
+						-- -- if vt and vt.get_current_completion_item() ~= nil then
+						-- -- 	vt.accept()
+						-- -- 	return
+						-- -- end
+
+						-- 2️⃣ cmp 菜单存在 → 选下一个
+						if cmp.visible() then
+							cmp.select_next_item()
+							return
+						end
+
+						-- 3️⃣ snippet 可跳 → 跳
+						if ls.expand_or_jumpable() then
+							ls.expand_or_jump()
+							return
+						end
+						-- 4️⃣ fallback
+						fallback()
+					end, { "i", "s" }),
+					["<S-Tab>"] = cmp.mapping(function(fallback)
+						if cmp.visible() then
+							cmp.select_prev_item()
+							return
+						end
+
+						if ls.jumpable(-1) then
+							ls.jump(-1)
+							return
+						end
+
+						fallback()
+					end, { "i", "s" }),
+				}),
+				sources = cmp.config.sources({
+					{ name = "codeium", priority = 1000 },
+					{ name = "nvim_lsp", priority = 600, max_item_count = 5 },
+					{ name = "luasnip", priority = 500, max_item_count = 3 },
+					{ name = "buffer", max_item_count = 3 },
+				}),
+			})
+		end,
+	},
 }

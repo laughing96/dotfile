@@ -4,8 +4,9 @@ package.path = package.path .. ";/opt/homebrew/share/lua/5.1/?.lua"
 
 -- 告诉 magick 库在哪里 (根据你 ls 的结果修改版本号)
 vim.env.MAGICK_WAND_PATH = "/opt/homebrew/lib/libMagickWand-7.Q16HDRI.dylib"
+-- config 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-if not vim.loop.fs_stat(lazypath) then
+if not vim.uv.fs_stat(lazypath) then
   vim.fn.system({
     "git",
     "clone",
