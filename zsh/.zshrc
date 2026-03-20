@@ -3,8 +3,8 @@
 bindkey '\e[1;5D' backward-word
 bindkey '\e[1;5C' forward-word
 
+
 # PATH env
-export OPENAI_API_KEY="sk-xxxxxx"
 export PATH="/opt/homebrew/bin:$PATH"
 export PATH="/opt/homebrew/opt/trash/bin:$PATH"
 export PATH="/usr/local/opt/postgresql/bin:$PATH"
@@ -301,7 +301,15 @@ le() {
 
 
 # 加载 fish 风格历史补全
-source  ~/.zsh/auto_complete.sh
-source ~/.zsh/ai_env.sh
+if [ -f ~/.zsh/auto_complete.sh ]; then
+  source  ~/.zsh/auto_complete.sh
+fi
+if [ -f ~/.zsh/ai_model_env.sh]; then
+  source ~/.zsh/ai_model_env.sh
+fi
+if [ -f ~/.zsh/ai_infra_env.sh ]; then
+    source ~/.zsh/ai_infra_env.sh
+fi
+
 eval "$(starship init zsh)"
 export PATH="/opt/homebrew/opt/openjdk@21/bin:$PATH"
