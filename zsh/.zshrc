@@ -4,6 +4,7 @@ bindkey '\e[1;5D' backward-word
 bindkey '\e[1;5C' forward-word
 
 # PATH env
+export OPENAI_API_KEY="sk-xxxxxx"
 export PATH="/opt/homebrew/bin:$PATH"
 export PATH="/opt/homebrew/opt/trash/bin:$PATH"
 export PATH="/usr/local/opt/postgresql/bin:$PATH"

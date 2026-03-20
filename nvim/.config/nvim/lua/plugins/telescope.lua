@@ -60,7 +60,8 @@ return {
 			vim.keymap.set("n", "<leader>bf", builtin.buffers, { desc = "Buffers" })
 			vim.keymap.set("n", "<leader>fh", builtin.help_tags, { desc = "Help tags" })
 			vim.keymap.set("n", "<leader>ff", builtin.git_status, { desc = "git status" })
-            
+			vim.keymap.set("n", "<leader>ll", builtin.lsp_document_symbols, { desc = "lsp document symbols" })
+
 			telescope.load_extension("ui-select")
 		end,
 	},

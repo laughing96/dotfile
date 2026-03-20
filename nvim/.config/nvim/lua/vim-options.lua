@@ -11,6 +11,9 @@ vim.cmd("set conceallevel=2")
 vim.g.mapleader = " "
 vim.g.background = "light"
 
+vim.opt.ignorecase = true
+vim.opt.smartcase = true
+
 vim.wo.number = true
 vim.opt.swapfile = false
 -- Automatically reload files if they have changed outside of Neovim

@@ -10,8 +10,44 @@ return {
 			"rafamadriz/friendly-snippets",
 		},
 	},
+
+	{
+		"akinsho/bufferline.nvim",
+		version = "*",
+		dependencies = "nvim-tree/nvim-web-devicons",
+		config = function()
+			require("bufferline").setup({
+				options = {
+					mode = "buffers",
+					numbers = "none",
+					max_name_length = 18,
+					max_prefix_length = 15, -- prefix used when a buffer is de-duplicated
+					tab_size = 18,
+					diagnostics = "nvim_lsp",
+					diagnostics_update_in_insert = false,
+					show_buffer_icons = true,
+					show_buffer_close_icons = true,
+					show_close_icon = false,
+					show_tab_indicators = true,
+				},
+			})
+
+			vim.keymap.set("n", "<leader>bfn", "<Cmd>BufferLineCycleNext<CR>", { desc = "BufferLineCycleNext" })
+			vim.keymap.set("n", "<leader>bfp", "<Cmd>BufferLineCyclePrev<CR>", { desc = "BufferLineCyclePrev" })
+		end,
+	},
+	{
+		"windwp/nvim-autopairs",
+		event = "InsertEnter",
+		config = function()
+			require("nvim-autopairs").setup({
+				-- disable_filetype = { "TelescopePrompt", "spectre_panel" },
+			})
+		end,
+	},
 	{
 		"supermaven-inc/supermaven-nvim",
+        disable = true,
 		event = "InsertEnter",
 
 		config = function()
