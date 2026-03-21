@@ -1,4 +1,6 @@
 zsh/.zsh/zsh-autosuggestions/
+**/ai_infra_env.sh
+**/ai_model_env.sh
 zsh/.zsh/zsh-history-substring-search/
 lazysql/.config/lazysql/history/
 **/Rime/Rime/build

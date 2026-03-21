@@ -4,7 +4,7 @@ return {
         lazy = false,
         config = function()
             require("mason").setup({
-                ensure_installed = { "java-debug-adapter", "java-test" },
+                ensure_installed = { "java-debug-adapter", "java-test","ShellCheck" },
             })
         end,
     },
@@ -14,7 +14,7 @@ return {
         dependencies = { { "mason-org/mason.nvim", opts = {} }, "neovim/nvim-lspconfig" },
         opts = {
             auto_install = true,
-            ensure_installed = { "lua_ls", "clangd", "ty", "ruff", "vue_ls", "ts_ls", "jdtls", "taplo",  },
+            ensure_installed = { "lua_ls", "clangd", "ty", "ruff", "vue_ls", "ts_ls", "jdtls", "taplo", "bashls",  },
         },
     },
     -- {
@@ -188,6 +188,7 @@ return {
             vim.lsp.enable("harper_ls")
             vim.lsp.enable({ "ts_ls", "vue_ls" }) -- If using `ts_ls` replace `vtsls` to `ts_ls`
             vim.lsp.enable("taplo")
+            vim.lsp.enable('bashls')
 
             vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "hover" })
             vim.keymap.set("n", "<leader>gd", vim.lsp.buf.definition, { desc = "definition" })

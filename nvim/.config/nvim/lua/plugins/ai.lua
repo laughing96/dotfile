@@ -1,21 +1,28 @@
 return {
 	{
-		"robitx/gp.nvim",
+		"laughing96/gp.nvim",
+        -- dir = '/Users/dl/Code/done/gp.nvim',
 		config = function()
 			local model = os.getenv("OPENAI_MODEL") or "gpt-4o-mini"
 			local openai_api_key = os.getenv("OPENAI_API_KEY")
 			local openai_api_endpoint = os.getenv("OPENAI_API_BASE") or "https://api.openai.com/v1"
+            local iflow_endpoint = os.getenv("IFLOW_BASE_URL")
+            local iflow_api_key = os.getenv("IFLOW_API_KEY")
 			local trace = vim.fn.stdpath("cache") .. "/gp_curl_trace.log"
-			vim.notify(trace)
+            -- vim.notify(iflow_endpoint)
 			require("gp").setup({
 				-- 推荐开启
 				chat_confirm_delete = false,
 				chat_dir = vim.fn.stdpath("data") .. "/gp_chats",
 				providers = {
-					openai = {
-						disable = true,
-						endpoint = openai_api_endpoint,
-						secret = openai_api_key,
+					-- openai = {
+					-- 	disable = true,
+					-- 	endpoint = openai_api_endpoint,
+					-- 	secret = openai_api_key,
+					-- },
+					iflow = {
+						endpoint = iflow_endpoint,
+						secret = iflow_api_key,
 					},
 					ollama = {
 						endpoint = "http://localhost:11434/v1/chat/completions",
@@ -24,12 +31,13 @@ return {
 				curl_params = {
 					-- "--noproxy",
 					-- "*",
+                    -- "--no-buffer",
 					"--trace-ascii",
 					trace,
 					"--trace-time",
 				},
-				default_command_agent = "ChatQwen3-8B",
-				default_chat_agent = "ChatQwen3-8B",
+				default_command_agent = "Codeiflow",
+				default_chat_agent = "Codeiflow",
 				agents = {
 					{ name = "ChatGPT4o", disable = true },
 					{ name = "ChatGPT-o3-mini", disable = true },
@@ -37,6 +45,19 @@ return {
 					{ name = "CodeGPT4o", disable = true },
 					{ name = "CodeGPT4o-mini", disable = true },
 					{ name = "CodeGPT-o3-mini", disable = true },
+					{
+						provider = "iflow",
+						name = "Codeiflow",
+						chat = true,
+						command = true,
+						-- string with model name or table with model name and parameters
+						model = {
+							model = os.getenv("IFLOW_MODEL"),
+							temperature = 0.7,
+							max_tokens = 1000,
+						},
+						system_prompt = "You are a general AI assistant.",
+					},
 					{
 						provider = "ollama",
 						name = "ChatQwen3-8B",

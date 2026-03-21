@@ -304,7 +304,7 @@ le() {
 if [ -f ~/.zsh/auto_complete.sh ]; then
   source  ~/.zsh/auto_complete.sh
 fi
-if [ -f ~/.zsh/ai_model_env.sh]; then
+if [ -f ~/.zsh/ai_model_env.sh ]; then
   source ~/.zsh/ai_model_env.sh
 fi
 if [ -f ~/.zsh/ai_infra_env.sh ]; then
