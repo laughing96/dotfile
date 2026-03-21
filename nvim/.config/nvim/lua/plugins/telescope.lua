@@ -57,7 +57,7 @@ return {
 			vim.keymap.set("n", "<C-p>", builtin.find_files, { desc = "find_files" })
 			vim.keymap.set("n", "<leader>fg", builtin.live_grep, { desc = "live grep" })
 			vim.keymap.set("n", "<leader><leader>", builtin.oldfiles, { desc = "oldfiles" })
-			vim.keymap.set("n", "<leader>bf", builtin.buffers, { desc = "Buffers" })
+			vim.keymap.set("n", "<leader>bfl", builtin.buffers, { desc = "Buffers" })
 			vim.keymap.set("n", "<leader>fh", builtin.help_tags, { desc = "Help tags" })
 			vim.keymap.set("n", "<leader>ff", builtin.git_status, { desc = "git status" })
 			vim.keymap.set("n", "<leader>ll", builtin.lsp_document_symbols, { desc = "lsp document symbols" })

@@ -47,9 +47,9 @@ return {
 	},
 	{
 		"supermaven-inc/supermaven-nvim",
-        disable = true,
-		event = "InsertEnter",
-
+		lazy = true,
+		ft = { "python", "lua" },
+		-- event = "InsertEnter",
 		config = function()
 			require("supermaven-nvim").setup({
 				keymaps = {

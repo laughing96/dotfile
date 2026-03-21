@@ -21,6 +21,7 @@ vim.opt.runtimepath:prepend(lazypath)
 
 require("vim-options")
 require("insert_image")
+require("easy_func")
 require("reading").setup()
 
 
