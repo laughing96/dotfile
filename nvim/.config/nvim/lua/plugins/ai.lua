@@ -3,9 +3,9 @@ return {
 		"laughing96/gp.nvim",
         -- dir = '/Users/dl/Code/done/gp.nvim',
 		config = function()
-			local model = os.getenv("OPENAI_MODEL") or "gpt-4o-mini"
-			local openai_api_key = os.getenv("OPENAI_API_KEY")
-			local openai_api_endpoint = os.getenv("OPENAI_API_BASE") or "https://api.openai.com/v1"
+			-- local model = os.getenv("OPENAI_MODEL") or "gpt-4o-mini"
+			-- local openai_api_key = os.getenv("OPENAI_API_KEY")
+			-- local openai_api_endpoint = os.getenv("OPENAI_API_BASE") or "https://api.openai.com/v1"
             local iflow_endpoint = os.getenv("IFLOW_BASE_URL")
             local iflow_api_key = os.getenv("IFLOW_API_KEY")
 			local trace = vim.fn.stdpath("cache") .. "/gp_curl_trace.log"
@@ -121,7 +121,7 @@ return {
 							.. "```{{filetype}}\n{{selection}}\n```\n\n"
 							.. "Please respond by explaining the code above."
 						local agent = gp.get_chat_agent()
-						gp.Prompt(params, gp.Target.popup, agent, template)
+						gp.Prompt(params, gp.Target.vnew, agent, template)
 					end,
 					-- GpInspectPlugin provides a detailed inspection of the plugin state
 					InspectPlugin = function(plugin, params)
@@ -137,7 +137,8 @@ return {
 					end,
 
 					-- GpInspectLog for checking the log file
-					InspectLog = function(plugin, params)
+					-- InspectLog = function(plugin, params)
+					InspectLog = function(plugin)
 						local log_file = plugin.config.log_file
 						local buffer = plugin.helpers.get_buffer(log_file)
 						if not buffer then
@@ -183,8 +184,8 @@ return {
 					end,
 				},
 				-- 常用快捷键
-				chat_shortcut = "<leader>ac",
-				command_shortcut = "<leader>aa",
+				-- chat_shortcut = "<leader>ac",
+				-- command_shortcut = "<leader>aa",
 			})
 
 			-- 我帮你补上最实用的快捷键
@@ -194,6 +195,7 @@ return {
 			vim.keymap.set("v", "<leader>aut", ":GpUnitTests<CR>", { desc = "AI unit test Code" })
 			vim.keymap.set("v", "<leader>aex", ":GpExplain<CR>", { desc = "AI Explain Code" })
 			vim.keymap.set("n", "<leader>ac", ":GpBufferChatNew split<CR>", { desc = "AI Chat" })
+			vim.keymap.set("v", "<leader>ats", ":GpTranslator split<CR>", { desc = "AI Translator" })
 		end,
 	},
 	{
@@ -226,7 +228,7 @@ return {
 			},
 		},
 		config = function()
-			---@type opencode.Opts
+			-- -@type opencode.Opts
 			vim.g.opencode_opts = {
 				-- Your configuration, if any; goto definition on the type or field for details
 			}

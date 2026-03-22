@@ -23,6 +23,7 @@ local function fix_invalid_json()
     %s/\<true\>/true/gie
     %s/\<false\>/false/gie
     %s/'/"/ge
+    %!jq .
   ]])
 end
 
@@ -30,12 +31,10 @@ vim.keymap.set("n", "<leader>dab", ":g/^$/d<CR>", { desc = "Delete empty lines" 
 -- JSON
 vim.keymap.set("v", "<leader>jf", function()
 	fix_invalid_json()
-	vim.cmd("%!jq .")
 end, { desc = "Fix invalid JSON + format" })
 
 vim.keymap.set("n", "<leader>jf", function()
 	fix_invalid_json()
-	vim.cmd("%!jq .")
 end, { desc = "Fix invalid JSON + format" })
 
 vim.keymap.set("n", "<leader>jk", ":%!jq 'keys'<CR>", { desc = "Show JSON keys" })
