@@ -80,6 +80,19 @@ return {
             local obsidian_path = home .. "/obsidian/mynote"
             local logicThinking = home .. "/logicThinking"
             require("obsidian").setup({
+                note_id_func = function(title)
+                    if title == nil then 
+                        return tostring(os.time())
+                    end
+                   -- title = title:gsub(" ","-")
+                    if title:match("[%w\128-\244_/-]*") then 
+                        return title
+                    end
+                    local new_title =title:lower()
+                        :gsub(" ", "-")
+                        :gsub("[^A-Za-z0-9-]", "")
+                    return new_title
+                end,
 
                 legacy_commands = false,
                 workspaces = {
