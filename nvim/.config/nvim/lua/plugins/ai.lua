@@ -1,15 +1,15 @@
 return {
 	{
 		"laughing96/gp.nvim",
-        -- dir = '/Users/dl/Code/done/gp.nvim',
+		-- dir = '/Users/dl/Code/done/gp.nvim',
 		config = function()
 			-- local model = os.getenv("OPENAI_MODEL") or "gpt-4o-mini"
 			-- local openai_api_key = os.getenv("OPENAI_API_KEY")
 			-- local openai_api_endpoint = os.getenv("OPENAI_API_BASE") or "https://api.openai.com/v1"
-            local iflow_endpoint = os.getenv("IFLOW_BASE_URL")
-            local iflow_api_key = os.getenv("IFLOW_API_KEY")
+			local iflow_endpoint = os.getenv("IFLOW_BASE_URL")
+			local iflow_api_key = os.getenv("IFLOW_API_KEY")
 			local trace = vim.fn.stdpath("cache") .. "/gp_curl_trace.log"
-            -- vim.notify(iflow_endpoint)
+			-- vim.notify(iflow_endpoint)
 			require("gp").setup({
 				-- 推荐开启
 				chat_confirm_delete = false,
@@ -31,7 +31,7 @@ return {
 				curl_params = {
 					-- "--noproxy",
 					-- "*",
-                    -- "--no-buffer",
+					-- "--no-buffer",
 					"--trace-ascii",
 					trace,
 					"--trace-time",
@@ -95,8 +95,17 @@ return {
 					-- example of making :%GpChatNew a dedicated command which
 					-- opens new chat with the entire current buffer as a context
 					BufferChatNew = function(gp, _)
-						-- call GpChatNew command in range mode on whole buffer
-						vim.api.nvim_command("%" .. gp.config.cmd_prefix .. "ChatNew")
+						_G.mode_history = _G.mode_history or {}
+						local cmd = gp.config.cmd_prefix .. "ChatNew vsplit"
+						-- 判断是否有 visual 选区
+						local mode = vim.fn.mode()
+
+						table.insert(_G.mode_history, os.date("%H:%M:%S") .. " - Mode: " .. mode)
+						if mode == "v" or mode == "V" or mode == "\22" then
+							vim.cmd("'<,'>" .. cmd)
+						else
+							vim.cmd("%" .. cmd)
+						end
 					end,
 					-- example of adding command which opens new chat dedicated for translation
 					Translator = function(gp, params)
@@ -194,7 +203,8 @@ return {
 			vim.keymap.set("v", "<leader>arw", ":GpReWrite<CR>", { desc = "AI Rewrite Code" })
 			vim.keymap.set("v", "<leader>aut", ":GpUnitTests<CR>", { desc = "AI unit test Code" })
 			vim.keymap.set("v", "<leader>aex", ":GpExplain<CR>", { desc = "AI Explain Code" })
-			vim.keymap.set("n", "<leader>ac", ":GpBufferChatNew split<CR>", { desc = "AI Chat" })
+			vim.keymap.set({"n","v"}, "<leader>abc", "<cmd>GpBufferChatNew<CR>", { desc = "AI  Chat with buffer" })
+			vim.keymap.set("n", "<leader>ac", ":GpChatNew split<CR>", { desc = "AI Chat" })
 			vim.keymap.set("v", "<leader>ats", ":GpTranslator split<CR>", { desc = "AI Translator" })
 		end,
 	},
