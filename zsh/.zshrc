@@ -108,9 +108,9 @@ alias tls="tmux ls"
 
 rss_yaml="/Users/dl/Code/k8s/hackernews-reader/rss.yaml"
 alias rsst="tmuxp load $rss_yaml" 
-linux_yaml="/Users/dl/obsidian/mynote/script/linux.yaml"
+linux_yaml="~/obsidian/mynote/script/linux.yaml"
 alias ldd3="tmuxp load $linux_yaml" 
-note_yaml="/Users/dl/obsidian/mynote/script/note.yaml"
+note_yaml="~/obsidian/mynote/script/note.yaml"
 alias note="tmuxp load $note_yaml"
 # ls 系列（现代化）
 alias ls='eza --icons --group-directories-first'
@@ -313,3 +313,7 @@ fi
 
 eval "$(starship init zsh)"
 export PATH="/opt/homebrew/opt/openjdk@21/bin:$PATH"
+
+if [ -f ~/.linuxbrew/bin/brew ]; then
+    eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv zsh)"
+fi
