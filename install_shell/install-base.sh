@@ -58,7 +58,8 @@ install_macos() {
 
     brew update
     brew install \
-        git lazygit ctags ncurses libelf openssl bison flex bc dwarves zstd esmtp mutt
+        git lazygit ctags ncurses libelf openssl bison flex bc dwarves zstd esmtp mutt bookokrat \
+        kaskade  iredis
 }
 
 # --------------------------
