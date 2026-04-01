@@ -52,7 +52,7 @@ return {
 		event = { "BufReadPost", "BufNewFile" },
 		build = ":TSUpdate",
 		config = function()
-			require("nvim-treesitter").install({ "rust", "javascript", "python", "typescript", "html", "vue" })
+			require("nvim-treesitter").install({ "rust", "javascript", "python", "typescript", "html", "vue", "java" })
 			vim.api.nvim_create_autocmd({ "FileType", "BufReadPost" }, {
 				group = vim.api.nvim_create_augroup("TreesitterAutoStart", { clear = true }),
 				callback = function()

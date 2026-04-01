@@ -14,7 +14,7 @@ return {
         dependencies = { { "mason-org/mason.nvim", opts = {} }, "neovim/nvim-lspconfig" },
         opts = {
             auto_install = true,
-            ensure_installed = { "lua_ls", "clangd", "ty", "ruff", "vue_ls", "ts_ls", "jdtls", "taplo", "bashls",  },
+            ensure_installed = { "lua_ls", "clangd", "ty", "ruff", "vue_ls", "ts_ls", "jdtls", "taplo", "bashls",  "java-debug-adapter", "java-test"},
         },
     },
     -- {
