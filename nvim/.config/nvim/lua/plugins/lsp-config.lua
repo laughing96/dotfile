@@ -1,6 +1,6 @@
 return {
     {
-        "williamboman/mason.nvim",
+        "mason-org/mason.nvim",
         lazy = false,
         config = function()
             require("mason").setup({
@@ -9,12 +9,12 @@ return {
         end,
     },
     {
-        "williamboman/mason-lspconfig.nvim",
+        "mason-org/mason-lspconfig.nvim",
         lazy = false,
         dependencies = { { "mason-org/mason.nvim", opts = {} }, "neovim/nvim-lspconfig" },
         opts = {
             auto_install = true,
-            ensure_installed = { "lua_ls", "clangd", "ty", "ruff", "vue_ls", "ts_ls", "jdtls", "taplo", "bashls",  "java-debug-adapter", "java-test"},
+            ensure_installed = { "lua_ls", "clangd", "ty", "ruff", "vue_ls", "ts_ls", "jdtls", "taplo", "bashls",   },
         },
     },
     -- {
