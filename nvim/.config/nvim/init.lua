@@ -64,4 +64,7 @@ vim.api.nvim_create_autocmd("BufReadCmd", {
     vim.api.nvim_buf_set_name(ev.buf, url)
   end,
 })
-
+vim.api.nvim_create_autocmd("InsertLeave", {
+  pattern = "*",
+  command = "silent! write"
+})
