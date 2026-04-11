@@ -311,9 +311,16 @@ if [ -f ~/.zsh/ai_infra_env.sh ]; then
     source ~/.zsh/ai_infra_env.sh
 fi
 
+if [ -f ~/.zsh/atuo_start/spicety_reddit.sh ]; then
+    source ~/.zsh/atuo_start/spicety_reddit.sh
+fi
+
+
+
 eval "$(starship init zsh)"
 export PATH="/opt/homebrew/opt/openjdk@21/bin:$PATH"
 
 if [ -f ~/.linuxbrew/bin/brew ]; then
     eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv zsh)"
 fi
+
