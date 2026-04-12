@@ -9,3 +9,4 @@ lazysql/.config/lazysql/history/
 *.log
 *.pdf
 **/result/
+**/node_modules/**

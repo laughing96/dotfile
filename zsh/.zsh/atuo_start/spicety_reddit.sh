@@ -1,6 +1,6 @@
 #!/bin/sh
 
-DIR="$HOME/Code/specity_node"
+DIR="$HOME/.zsh/util/specity_node"
 
 if [ -d "$DIR" ]; then
     cd "$DIR" || exit
