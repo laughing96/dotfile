@@ -194,7 +194,7 @@ return {
             vim.keymap.set("n", "<leader>gd", vim.lsp.buf.definition, { desc = "definition" })
             vim.keymap.set("n", "<leader>gr", vim.lsp.buf.references, { desc = "references" })
             vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, { desc = "rename" })
-            vim.keymap.set("n", "<leader>gI", vim.lsp.buf.implementation, { desc = "Implementation" })
+            vim.keymap.set("n", "<leader>gi", vim.lsp.buf.implementation, { desc = "Implementation" })
             vim.keymap.set("n", "<leader>gD", vim.lsp.buf.declaration, { desc = "Declaration" })
             vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "code action" })
             vim.keymap.set("n", "<leader>gf", vim.lsp.buf.format, { desc = "format code" })

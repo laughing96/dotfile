@@ -140,5 +140,5 @@ app.get("/reddit/:sub/:config", async (req, res) => {
 });
 
 app.listen(3000, () => {
-    console.log("Spotify reddit Proxy running on http://localhost:3000");
+    // console.log("Spotify reddit Proxy running on http://localhost:3000");
 });
