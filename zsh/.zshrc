@@ -157,6 +157,9 @@ alias ps='ps'
 alias top='htop'
 
 # functions
+sayhi() {
+    [ $(date +%H) -lt 20 ] && echo "阳明立志-知人知势-做事赚钱-不动心" || echo "阳明立志-知人知势-要幸福-不动心"
+}
 # 交互删除文件到回收站
 del() {
     # 如果没传参数，提示
@@ -300,6 +303,7 @@ le() {
 }
 
 
+
 # 加载 fish 风格历史补全
 if [ -f ~/.zsh/auto_complete.sh ]; then
   source  ~/.zsh/auto_complete.sh
@@ -315,8 +319,6 @@ if [ -f ~/.zsh/atuo_start/spicety_reddit.sh ]; then
     source ~/.zsh/atuo_start/spicety_reddit.sh
 fi
 
-
-
 eval "$(starship init zsh)"
 export PATH="/opt/homebrew/opt/openjdk@21/bin:$PATH"
 
@@ -324,3 +326,4 @@ if [ -f ~/.linuxbrew/bin/brew ]; then
     eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv zsh)"
 fi
 
+sayhi
