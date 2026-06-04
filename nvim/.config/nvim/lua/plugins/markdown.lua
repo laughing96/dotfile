@@ -199,7 +199,7 @@ return {
         vim.keymap.set("n", "<leader>obp", "<cmd>Obsidian paste_img<cr>", { desc = "Paste Pic" }),
         vim.keymap.set("n", "<leader>obd", "<cmd>Obsidian dailies<cr>", { desc = "New Dailies" }),
         vim.keymap.set("n", "<leader>obl", "<cmd>Obsidian toc<cr>", { desc = "list current table" }),
-        vim.keymap.set("n", "<leader>obt", "<cmd>Obsidian template<cr>", { desc = "template" }),
+        vim.keymap.set("n", "<leader>obt", "<cmd>Obsidian new_from_template<cr>", { desc = "template" }),
         vim.keymap.set("n", "<leader>obw", "<cmd>Obsidian workspace<cr>", { desc = "workspace" }),
         vim.keymap.set("v", "<leader>obe", "<cmd>Obsidian extract_note<cr>", { desc = "extract and insert " }),
         -- keys = {

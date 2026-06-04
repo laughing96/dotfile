@@ -120,6 +120,7 @@ app.get("/reddit/:sub/:config", async (req, res) => {
         const sub = req.params.sub;
         const config = req.params.config;
         const url = `https://www.reddit.com/r/${sub}/${config}.json?limit=100&count=10&raw_json=1`;
+        // console.log(`url is ${url}`)
         if (req.query.after){
             url += `&after=${req.query.after}`
         } 

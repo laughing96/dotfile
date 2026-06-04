@@ -8,6 +8,6 @@ if [ -d "$DIR" ]; then
         :
         # echo "port 3000 in use"
     else
-        node $DIR//mock_curl.js  2>&1 &
+        node $DIR/mock_curl.js  2>&1 &
     fi
 fi
