@@ -112,6 +112,8 @@ linux_yaml="~/obsidian/mynote/script/linux.yaml"
 alias ldd3="tmuxp load $linux_yaml" 
 note_yaml="~/obsidian/mynote/script/note.yaml"
 alias note="tmuxp load $note_yaml"
+code_yaml="~/obsidian/mynote/script/code.yaml"
+alias code="tmuxp load $code_yaml"
 # ls 系列（现代化）
 alias ls='eza --icons --group-directories-first'
 alias ll='eza -lh --icons --group-directories-first'

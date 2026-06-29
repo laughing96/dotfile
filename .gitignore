@@ -10,3 +10,4 @@ lazysql/.config/lazysql/history/
 *.pdf
 **/result/
 **/node_modules/**
+Rime/Rime/luna_pinyin.userdb/*
