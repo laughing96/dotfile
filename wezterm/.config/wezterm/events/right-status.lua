@@ -17,7 +17,7 @@ EVENT_OPTS.schema = {
    {
       name = 'date_format',
       type = 'string',
-      default = '%A %D %H:%M:%S',
+      default = '%j %a %D %H:%M:%S',
    },
    {
       name = 'show_uptime',

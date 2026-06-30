@@ -17,7 +17,9 @@ def days_since_chinese_new_year():
         cny = LunarDate(lunar_year, 1, 1).toSolarDate()
 
     days = (today - cny).days
-    return days
+    all_days = 365
+    left_days = all_days - days
+    return left_days
 
 
 if __name__ == "__main__":
