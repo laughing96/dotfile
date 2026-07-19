@@ -4,3 +4,6 @@ last.fm 自带的cookie 会拦截变成406,
 
 # 方案
 chrome 启动一个 extension,实现页面先访问 home,刷新cookie .
+
+# icon
+./png.sh lastfm.png
