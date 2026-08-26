@@ -1,5 +1,5 @@
 1. ./install.sh
-2. 修改原来的reddit 的index.js 中的 getSubreddit,
+2. 修改原来~/.config/spicetify/CustomApps/reddit/index.js的reddit 的index.js 中的 getSubreddit,
     replace url to 
     ```JavaScript
     url = `http:127.0.0.1:3000/reddit/${CONFIG.lastService}/${sortConfig.by}`
