@@ -1,180 +1,383 @@
 return {
-    ----
-    ---maven
-    -----
-    {
-        "eatgrass/maven.nvim",
-        cmd = { "Maven", "MavenExec" },
-        dependencies = "nvim-lua/plenary.nvim",
-        config = function()
-            require("maven").setup({
-                executable = "mvn", -- `mvn` should be in your `PATH`, or the path to the maven exectable, for example `./mvnw`
-                cwd = nil, -- work directory, default to `vim.fn.getcwd()`
-                settings = nil, -- specify the settings file or use the default settings
-                commands = { -- add custom goals to the command list
-                    { cmd = { "clean", "compile" }, desc = "clean then compile" },
-                },
-            })
-        end,
-    },
-    --------------------------------------------------
-    -- JAVA
-    --------------------------------------------------
-    {
-        "mfussenegger/nvim-jdtls",
+	--------------------------------------------------
+	-- MAVEN
+	--------------------------------------------------
+	{
+		"eatgrass/maven.nvim",
+		cmd = { "Maven", "MavenExec" },
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+		},
 
-        ft = "java",
+		config = function()
+			require("maven").setup({
+				executable = "mvn",
+				cwd = nil,
+				settings = nil,
 
-        dependencies = {
-            "neovim/nvim-lspconfig",
-            "mfussenegger/nvim-dap",
-            "mason-org/mason.nvim",
-        },
+				commands = {
+					{
+						cmd = { "clean", "compile" },
+						desc = "clean then compile",
+					},
+				},
+			})
+		end,
+	},
 
-        config = function()
-            local jdtls = require("jdtls")
-            local util = require("lspconfig.util")
+	--------------------------------------------------
+	-- JAVA / JDTLS
+	--------------------------------------------------
+	{
+		"mfussenegger/nvim-jdtls",
 
-            --------------------------------------------------
-            -- PATHS
-            --------------------------------------------------
-            local mason = vim.fn.stdpath("data") .. "/mason/packages"
+		ft = "java",
 
-            local jdtls_path = mason .. "/jdtls"
+		dependencies = {
+			"neovim/nvim-lspconfig",
+			"mfussenegger/nvim-dap",
+			"mason-org/mason.nvim",
+		},
 
-            local launcher = vim.fn.glob(jdtls_path .. "/plugins/org.eclipse.equinox.launcher_*.jar")
+		config = function()
+			local jdtls = require("jdtls")
+			local util = require("lspconfig.util")
+			local dap = require("dap")
 
-            local config_os = vim.fn.has("mac") == 1 and jdtls_path .. "/config_mac" or jdtls_path .. "/config_linux"
+			--------------------------------------------------
+			-- PATHS
+			--------------------------------------------------
 
-            --------------------------------------------------
-            -- DEBUG + TEST bundles
-            --------------------------------------------------
-            local bundles = {}
+			local mason = vim.fn.stdpath("data") .. "/mason/packages"
+			local jdtls_path = mason .. "/jdtls"
 
-            vim.list_extend(
-                bundles,
-                vim.split(
-                    vim.fn.glob(mason .. "/java-debug-adapter/extension/server/com.microsoft.java.debug.plugin-*.jar"),
-                    "\n"
-                )
-            )
+			local launcher = vim.fn.glob(jdtls_path .. "/plugins/org.eclipse.equinox.launcher_*.jar")
 
-            vim.list_extend(bundles, vim.split(vim.fn.glob(mason .. "/java-test/extension/server/*.jar"), "\n"))
+			--------------------------------------------------
+			-- JDTLS PLATFORM CONFIG
+			--------------------------------------------------
 
-            --------------------------------------------------
-            -- ROOT (Maven support)
-            --------------------------------------------------
-            local root_dir = util.root_pattern("pom.xml", "gradlew", "mvnw", ".git")(vim.fn.getcwd())
+			local config_os
 
-            if root_dir == nil then
-                return
-            end
+			if vim.fn.has("mac") == 1 then
+				local arm = jdtls_path .. "/config_mac_arm"
 
-            --------------------------------------------------
-            -- WORKSPACE
-            --------------------------------------------------
-            local project = vim.fn.fnamemodify(root_dir, ":p:h:t")
-            vim.notify(project)
+				if vim.fn.has("arm64") == 1 and vim.fn.isdirectory(arm) == 1 then
+					config_os = arm
+				else
+					config_os = jdtls_path .. "/config_mac"
+				end
+			elseif vim.fn.has("win32") == 1 then
+				config_os = jdtls_path .. "/config_win"
+			else
+				config_os = jdtls_path .. "/config_linux"
+			end
 
-            local workspace = vim.fn.stdpath("data") .. "/jdtls-workspace/" .. project
+			--------------------------------------------------
+			-- DEBUG / TEST BUNDLES
+			--------------------------------------------------
 
-            vim.fn.mkdir(workspace, "p")
+			local bundles = {}
 
-            --------------------------------------------------
-            -- CMD
-            --------------------------------------------------
-            local cmd = {
+			-- Java Debug Adapter
+			local debug_bundle =
+				vim.fn.glob(mason .. "/java-debug-adapter/extension/server/" .. "com.microsoft.java.debug.plugin-*.jar")
 
-                "java",
+			if debug_bundle ~= "" then
+				vim.list_extend(bundles, vim.split(debug_bundle, "\n"))
+			end
 
-                "-Declipse.application=org.eclipse.jdt.ls.core.id1",
-                "-Declipse.product=org.eclipse.jdt.ls.core.product",
+			-- Java Test
+			local test_bundles = vim.fn.glob(mason .. "/java-test/extension/server/*.jar", true, true)
 
-                "-Dlog.protocol=true",
-                "-Dlog.level=ALL",
+			vim.list_extend(bundles, test_bundles)
 
-                "-Xmx4g",
+			--------------------------------------------------
+			-- ROOT DIRECTORY
+			--------------------------------------------------
 
-                "--add-modules=ALL-SYSTEM",
-                "--add-opens",
-                "java.base/java.util=ALL-UNNAMED",
-                "--add-opens",
-                "java.base/java.lang=ALL-UNNAMED",
+			local bufname = vim.api.nvim_buf_get_name(0)
 
-                "-jar",
-                launcher,
+			local root_dir = util.root_pattern("pom.xml", "gradlew", "mvnw", ".git")(bufname)
+				or vim.fn.fnamemodify(bufname, ":h")
 
-                "-configuration",
-                config_os,
+			--------------------------------------------------
+			-- WORKSPACE
+			--------------------------------------------------
 
-                "-data",
-                workspace,
-            }
+			local project = vim.fn.fnamemodify(root_dir, ":t")
 
-            --------------------------------------------------
-            -- CONFIG
-            --------------------------------------------------
-            local config = {
+			local workspace = vim.fn.stdpath("data") .. "/jdtls-workspace/" .. project
 
-                cmd = cmd,
+			vim.fn.mkdir(workspace, "p")
 
-                root_dir = root_dir,
+			--------------------------------------------------
+			-- JDTLS COMMAND
+			--------------------------------------------------
 
-                init_options = {
-                    bundles = bundles,
-                },
+			local cmd = {
+				"java",
 
-                settings = {
+				"-Declipse.application=org.eclipse.jdt.ls.core.id1",
+				"-Declipse.product=org.eclipse.jdt.ls.core.product",
 
-                    java = {
+				"-Dlog.protocol=true",
+				"-Dlog.level=ALL",
 
-                        maven = {
-                            downloadSources = true,
-                            updateSnapshots = true,
-                        },
+				"-Xmx4g",
 
-                        configuration = {
-                            updateBuildConfiguration = "interactive",
-                            -- maven = {
-                            --     userSettings = vim.fn.expand("~/.m2/settings.xml"),
-                            -- },
-                        },
+				"--add-modules=ALL-SYSTEM",
 
-                        references = {
-                            includeDecompiledSources = true,
-                        },
-                    },
-                },
-            }
+				"--add-opens",
+				"java.base/java.util=ALL-UNNAMED",
 
-            --------------------------------------------------
-            -- START
-            --------------------------------------------------
-            jdtls.start_or_attach(config)
+				"--add-opens",
+				"java.base/java.lang=ALL-UNNAMED",
 
-            jdtls.setup_dap({
-                hotcodereplace = "auto",
-            })
+				"-jar",
+				launcher,
 
-            --------------------------------------------------
-            -- KEYMAPS
-            --------------------------------------------------
-            vim.keymap.set("n", "<leader>jo", jdtls.organize_imports, { desc = "Organize imports" })
+				"-configuration",
+				config_os,
 
-            vim.keymap.set("n", "<leader>jc", function()
-                jdtls.compile("full")
-            end)
+				"-data",
+				workspace,
+			}
 
-            vim.keymap.set("n", "<leader>jr", function()
-                require("jdtls").run_main_class()
-            end, { desc = "Run main class" })
+			--------------------------------------------------
+			-- JDTLS CONFIG
+			--------------------------------------------------
 
-            vim.keymap.set("n", "<leader>jd", function()
-                require("jdtls").debug_main_class()
-            end, { desc = "Debug main class" })
-            -- vim.keymap.set("n", "<leader>jd", jdtls.test_nearest_method, { desc = "Debug test" })
+			local config = {
+				cmd = cmd,
 
-            vim.keymap.set("n", "<leader>jD", jdtls.test_class, { desc = "Debug class" })
-        end,
-    },
+				root_dir = root_dir,
+
+				init_options = {
+					bundles = bundles,
+				},
+
+				settings = {
+					java = {
+
+						maven = {
+							downloadSources = true,
+							updateSnapshots = true,
+						},
+
+						configuration = {
+							updateBuildConfiguration = "interactive",
+						},
+
+						references = {
+							includeDecompiledSources = true,
+						},
+					},
+				},
+			}
+
+			--------------------------------------------------
+			-- START JDTLS
+			--------------------------------------------------
+
+			jdtls.start_or_attach(config)
+
+			--------------------------------------------------
+			-- DAP
+			--------------------------------------------------
+
+			jdtls.setup_dap({
+				hotcodereplace = "auto",
+			})
+
+			--------------------------------------------------
+			-- JAVA DAP CONFIGURATION
+			--------------------------------------------------
+
+			dap.configurations.java = {
+				{
+					type = "java",
+					request = "launch",
+					name = "Launch Java",
+
+					mainClass = function()
+						return vim.fn.input("Main class: ")
+					end,
+				},
+			}
+
+			--------------------------------------------------
+			-- KEYMAPS
+			--------------------------------------------------
+
+			-- Organize imports
+			vim.keymap.set("n", "<leader>jo", jdtls.organize_imports, {
+				desc = "Organize imports",
+				buffer = true,
+			})
+
+			-- Compile
+			vim.keymap.set("n", "<leader>jc", function()
+				jdtls.compile("full")
+			end, {
+				desc = "Compile Java",
+				buffer = true,
+			})
+
+			-- Run main class
+			vim.keymap.set("n", "<leader>jR", function()
+				local file = vim.api.nvim_buf_get_name(0)
+				local dir = vim.fn.fnamemodify(file, ":h")
+				local class = vim.fn.fnamemodify(file, ":t:r")
+
+				-- Read package declaration
+				local package = nil
+
+				for _, line in ipairs(vim.api.nvim_buf_get_lines(0, 0, 30, false)) do
+					local p = line:match("^%s*package%s+([%w%.]+)%s*;")
+					if p then
+						package = p
+						break
+					end
+				end
+
+				local main_class = package and (package .. "." .. class) or class
+
+				-- Standalone Java file
+				local root = vim.fn.fnamemodify(vim.fn.findfile("pom.xml", ".;" .. vim.fn.getcwd()), ":h")
+
+				if root == "." or root == "" then
+					root = nil
+				end
+
+				if not root then
+					vim.cmd("botright split | terminal")
+
+					local cmd = "cd "
+						.. vim.fn.shellescape(dir)
+						.. " && javac "
+						.. vim.fn.shellescape(file)
+						.. " && java "
+						.. vim.fn.shellescape(main_class)
+						.. "\n"
+
+					vim.fn.chansend(vim.b.terminal_job_id, cmd)
+
+					return
+				end
+
+				-- Maven project
+				require("dap").run({
+					type = "java",
+					request = "launch",
+					name = "Run Java",
+					mainClass = main_class,
+				})
+			end, {
+				desc = "Run Java",
+				buffer = true,
+			})
+
+			vim.keymap.set("n", "<leader>jr", function()
+				local root = vim.fs.root(0, {
+					"pom.xml",
+					"build.gradle",
+					"build.gradle.kts",
+				})
+
+				if not root then
+					vim.notify("Java project root not found", vim.log.levels.ERROR)
+					return
+				end
+
+				local config_file = root .. "/.nvim/java.lua"
+
+				local main_class
+
+				-- If .nvim/java.lua exists, use the configured mainClass.
+				if vim.fn.filereadable(config_file) == 1 then
+					local ok, project_config = pcall(dofile, config_file)
+
+					if not ok then
+						vim.notify("Failed to load " .. config_file .. "\n" .. project_config, vim.log.levels.ERROR)
+						return
+					end
+
+					main_class = project_config.mainClass
+
+					if not main_class then
+						vim.notify("mainClass is not configured in .nvim/java.lua", vim.log.levels.WARN)
+					end
+				else
+					-- No .nvim/java.lua: notify the user and ask for mainClass.
+					vim.notify("No .nvim/java.lua found. Please enter the main class.", vim.log.levels.WARN)
+				end
+
+				-- Ask the user when no configured mainClass is available.
+				if not main_class or main_class == "" then
+                    vim.notify("Main class is required", vim.log.levels.ERROR)
+					main_class = vim.fn.input("Main class: ")
+
+					if main_class == "" then
+						vim.notify("Main class is required", vim.log.levels.ERROR)
+						return
+					end
+				end
+
+				require("dap").run({
+					type = "java",
+					request = "launch",
+					name = "Run Java",
+					mainClass = main_class,
+				})
+			end, {
+				desc = "Run Java project",
+				buffer = true,
+			})
+
+			--#region
+			-- vim.keymap.set("n", "<leader>jr", function()
+			-- 	dap.run({
+			-- 		type = "java",
+			-- 		request = "launch",
+			-- 		name = "Run Java",
+			--
+			-- 		mainClass = function()
+			-- 			return vim.fn.input("Main class: ")
+			-- 		end,
+			-- 	})
+			-- end, {
+			-- 	desc = "Run Java main",
+			-- 	buffer = true,
+			-- })
+			-- --
+			-- Debug main class
+			vim.keymap.set("n", "<leader>jd", function()
+				dap.run({
+					type = "java",
+					request = "launch",
+					name = "Debug Java",
+
+					mainClass = function()
+						return vim.fn.input("Main class: ")
+					end,
+				})
+			end, {
+				desc = "Debug Java main",
+				buffer = true,
+			})
+
+			-- Debug test class
+			vim.keymap.set("n", "<leader>jD", jdtls.test_class, {
+				desc = "Debug test class",
+				buffer = true,
+			})
+
+			-- Run nearest test
+			vim.keymap.set("n", "<leader>jt", jdtls.test_nearest_method, {
+				desc = "Run nearest test",
+				buffer = true,
+			})
+		end,
+	},
 }
