@@ -100,11 +100,19 @@ export PKG_CONFIG_PATH="/opt/homebrew/opt/readline/lib/pkgconfig:/opt/homebrew/o
 # export PATH="/opt/homebrew/opt/tcl-tk@8/bin:$PATH"
 
 # alias 
+# ios
+install_ios_file="$HOME/Code/breath-app/build-ios.sh"
+if [ -f "$install_ios_file" ]; then
+    install_ios() {
+        "$install_ios_file"
+    }
+fi
 # tmux
 alias ta='tmux new-session -A -s main'
 alias tm='tmux'
 alias tks="tmux kill-session -t $TMUX_PANE"
 alias tls="tmux ls"
+
 
 rss_yaml="/Users/dl/Code/k8s/hackernews-reader/rss.yaml"
 alias rsst="tmuxp load $rss_yaml" 
