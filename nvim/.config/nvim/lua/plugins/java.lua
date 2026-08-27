@@ -1,3 +1,4 @@
+-- local maven_setting_path = ""
 return {
 	--------------------------------------------------
 	-- MAVEN
@@ -14,6 +15,7 @@ return {
 				executable = "mvn",
 				cwd = nil,
 				settings = nil,
+                -- settings = maven_setting_path,
 
 				commands = {
 					{
@@ -167,6 +169,9 @@ return {
 
 						configuration = {
 							updateBuildConfiguration = "interactive",
+-- maven = {
+--                 userSettings = vim.fn.expand("~/.m2/settings.xml"),
+--             },
 						},
 
 						references = {
