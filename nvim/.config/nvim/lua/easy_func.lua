@@ -45,3 +45,32 @@ vim.keymap.set("n", "<leader>jm", ":%!jq -c .<CR>", { desc = "Minify JSON" })
 vim.keymap.set("n", "<leader>jl", function()
 	vim.cmd(":g/^{/d<CR>}")
 end, { desc = "Keep only JSON lines start with {}" })
+
+
+local function insert_separator()
+  local comment = "#"
+
+  local ft = vim.bo.filetype
+
+  if ft == "lua" then
+    comment = "--"
+  elseif ft == "javascript"
+      or ft == "typescript"
+      or ft == "java"
+      or ft == "c"
+      or ft == "cpp" then
+    comment = "//"
+  elseif ft == "vim" then
+    comment = '"'
+  elseif ft == "sql" then
+    comment = "--"
+  end
+
+  vim.api.nvim_put({
+    comment .. " =========================================",
+  }, "c", true, true)
+end
+
+vim.keymap.set("n", "<leader>#", insert_separator, {
+  desc = "Insert comment separator",
+})
