@@ -170,6 +170,16 @@ alias top='htop'
 sayhi() {
     [ $(date +%H) -lt 20 ] && echo "阳明立志-知人知势-做事赚钱-不动心" || echo "阳明立志-知人知势-要幸福-不动心"
 }
+# url 解码
+urldecode() {
+    if [[ $# -gt 0 ]]; then
+        printf '%s' "$*" | python3 -c \
+            'import sys, urllib.parse; print(urllib.parse.unquote(sys.stdin.read()))'
+    else
+        python3 -c \
+            'import sys, urllib.parse; print(urllib.parse.unquote(sys.stdin.read()))'
+    fi
+}
 # 交互删除文件到回收站
 del() {
     # 如果没传参数，提示
@@ -325,8 +335,15 @@ if [ -f ~/.zsh/ai_infra_env.sh ]; then
     source ~/.zsh/ai_infra_env.sh
 fi
 
+# spicety
 if [ -f ~/.zsh/atuo_start/spicety_reddit.sh ]; then
     source ~/.zsh/atuo_start/spicety_reddit.sh
+fi
+
+# dns
+if [ -f ~/.zsh/atuo_start/dns_record.sh ];then 
+    # echo "dns server"
+    sh ~/.zsh/atuo_start/dns_record.sh
 fi
 
 eval "$(starship init zsh)"
