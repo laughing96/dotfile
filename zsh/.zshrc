@@ -167,6 +167,35 @@ alias ps='ps'
 alias top='htop'
 
 # functions
+#
+# tmux
+fix_tmux() {
+  local dir="$HOME/.tmux/resurrect"
+  local file="$dir/my.txt"
+  local last="$dir/last"
+
+  [[ -f "$file" ]] || {
+    echo "错误：找不到 $file"
+    return 1
+  }
+
+  if [ -f "$last" ];then
+      rm -f "$last"
+  fi
+
+  ln -sfn $file $last
+
+    tmux new-session -d -s main && tmux run-shell ~/.tmux/plugins/tmux-resurrect/scripts/restore.sh && tmux attach -t main
+}
+
+
+ts() {
+  local session
+  session=$(tmux list-sessions -F '#S' 2>/dev/null | fzf --layout=reverse --prompt='select session> ') || return
+  [[ -n "$session" ]] && tmux switch-client -t "$session" 2>/dev/null ||
+    tmux attach-session -t "$session"
+}
+
 sayhi() {
     [ $(date +%H) -lt 20 ] && echo "阳明立志-知人知势-做事赚钱-不动心" || echo "阳明立志-知人知势-要幸福-不动心"
 }
