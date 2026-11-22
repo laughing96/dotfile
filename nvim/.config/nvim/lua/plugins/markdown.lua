@@ -106,11 +106,11 @@ return {
                         -- path = "/Users/dl/obsidian/dl note",
                         path = logicThinking,
                     },
-                    {
-                        name = "test",
-                        -- path = "/Users/dl/obsidian/dl note",
-                        path = test_path,
-                    },
+                    -- {
+                    --     name = "test",
+                    --     -- path = "/Users/dl/obsidian/dl note",
+                    --     path = test_path,
+                    -- },
                 },
                 daily_notes = {
                     folder = "Daily",
