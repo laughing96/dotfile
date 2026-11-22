@@ -31,8 +31,8 @@ if [[ -f "$ZSH_ALIAS_FILE" ]];then
 fi
 
 ZSH_ENV_DIR="$HOME/.zsh/zsh_env"
-if [[ -d "$ZSH_FUNC_DIR" ]]; then
-    for file in "$ZSH_FUNC_DIR"/*.sh; do
+if [[ -d "$ZSH_ENV_DIR" ]]; then
+    for file in "$ZSH_ENV_DIR"/*.sh; do
         [[ -f "$file" ]] || continue
         source "$file"
     done
@@ -54,5 +54,14 @@ export PATH="/opt/homebrew/opt/openjdk@21/bin:$PATH"
 if [ -f ~/.linuxbrew/bin/brew ]; then
     eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv zsh)"
 fi
+
+SECRET_FUNC_DIR="/Users/dl/Code/dotfile_pri/env"
+if [[ -d "$SECRET_FUNC_DIR" ]]; then
+    for file in "$SECRET_FUNC_DIR"/*.sh; do
+        [[ -f "$file" ]] || continue
+        source "$file"
+    done
+fi
+
 
 sayhi
